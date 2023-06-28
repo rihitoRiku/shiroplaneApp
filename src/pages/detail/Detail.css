@@ -1,0 +1,39 @@
+html {
+    scroll-behavior: smooth;
+  }
+  
+  #home {
+    min-height: 100vh;
+  }
+  
+  #about {
+    min-height: 100vh;
+  }
+  
+  .about-info > a {
+    color: #3b82f6;
+  }
+  
+  .proficient {
+    border: 2px solid #20e584;
+    background-color: #4dacec15;
+  }
+  
+  .intermediate {
+    border: 2px solid rgb(216, 216, 17);
+    background-color: #dbdca826;
+  }
+  
+  .beginner {
+    border: 2px solid gray;
+    background-color: #b6bbbb26;
+  }
+  
+  .ending-msg {
+    height: 75px;
+    /* background-color: #22223b;
+      color: #f8f9fa; */
+    background-color: #20e584;
+    color: #000;
+    width: 100%;
+  }
