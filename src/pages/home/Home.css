@@ -38,7 +38,17 @@ html {
   width: 100%;
 }
 
+/* Font */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Delius&family=Nanum+Pen+Script&display=swap');
+
+.font-a{
+  font-family: 'Annie Use Your Telescope', cursive;
+}
+.font-b{
+  font-family: 'Delius', cursive;
+}
+
 
 /* Variables */
 :root {
@@ -53,6 +63,9 @@ body {
   margin: var(--box-spacing);
   font-family: "Open Sans", sans-serif;
   font-size: 14.5px;
+  background-image: url("../../assets/dot-grid.png");
+  /* background-size: cover; */
+  background-repeat: repeat;
 }
 
 * {
@@ -77,6 +90,7 @@ body {
   width: 100%;
   grid-column: auto / span 1;
   box-shadow: 0px 5px 7px 1px rgba(0, 10, 20, 0.14);
+  background-image: url("../../assets/so-white.png");
 }
 
 /* Card sizes */

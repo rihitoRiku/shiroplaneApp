@@ -17,13 +17,13 @@ function Card({ imageSrc, title, description }) {
     }
 
     return (
-        <div className={`card ${cardSizeClass} reveal`}>
+        <div className={`card ${cardSizeClass} reveal bg-zinc-50 font-b`}>
             <div className="card-image">
                 <img src={imageSrc} alt={title} />
             </div>
             <div className="card-body">
                 <div className="card-text">
-                    <h3>{title}</h3>
+                    <h3 className="font-semibold">{title}</h3>
                     <p>{description}</p>
                 </div>
                 {/* <button>More...</button> */}

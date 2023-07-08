@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Detail.css";
-import p1 from "../../assets/p4.jpg";
+// import p1 from "../../assets/p4.jpg";
 
 function Detail() {
   return (
@@ -19,7 +19,7 @@ function Detail() {
       </div>
       <div className="w-[84rem]">
         <div className="">
-          <img className="w-full" src={p1} alt="" />
+          {/* <img className="w-full" src={p1} alt="" /> */}
         </div>
       </div>
     </>
