@@ -14,18 +14,21 @@ function Dashboard() {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const UploadImage = () => {
-    const formData = new FormData();
-
-    imageSelected.forEach((item) => {
+  const UploadImage = async () => {
+    const uploadPromises = imageSelected.map((item) => {
+      const formData = new FormData();
       formData.append("file", item.file);
+      formData.append("upload_preset", "er4tbb4l");
+      return Axios.post("https://api.cloudinary.com/v1_1/dqmorrdhr/upload", formData);
     });
 
-    formData.append("upload_preset", "er4tbb4l");
-
-    Axios.post("https://api.cloudinary.com/v1_1/dqmorrdhr/upload", formData).then((Response) => {
-      console.log(Response);
-    });
+    try {
+      const responses = await Promise.all(uploadPromises);
+      console.log(responses);
+      setImageSelected([]);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const removeFile = (index) => {
