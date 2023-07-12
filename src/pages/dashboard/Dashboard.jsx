@@ -10,6 +10,7 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
+    
     const newFiles = acceptedFiles.map((file) => ({
       file,
       path: URL.createObjectURL(file),
@@ -35,7 +36,14 @@ function Dashboard() {
       return Axios.post(
         "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
         formData
-      );
+      ).then((response) => {
+        const newImages = {
+          // title,
+          // desc,
+          imgSrc: response.data.secure_url,
+        }
+        Axios.post('http://localhost:5000/images', newImages);
+      });
     });
 
     try {
