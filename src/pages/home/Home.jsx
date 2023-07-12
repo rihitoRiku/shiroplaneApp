@@ -16,12 +16,12 @@ import iconslinkedin from "../../assets/linkedin.png"
 // ScrollReveal().reveal(".reveal", { delay: 500 });
 
 function Home() {
-  const [dataImages, setDataImages] = useState([]);
-  useEffect(() => {
-    Axios.get(`http://localhost:5000/images`).then((response) => {
-      setDataImages(response.data.data);
-    });
-  }, []);
+  // const [dataImages, setDataImages] = useState([]);
+  // useEffect(() => {
+  //   Axios.get(`http://localhost:5000/images`).then((response) => {
+  //     setDataImages(response.data.data);
+  //   });
+  // }, []);
   return (
     <>
       {/* Link Icon */}
@@ -73,7 +73,7 @@ function Home() {
           Gallery
         </div>
         <div className="md:w-5/6 min-h-screen container mx-auto border-solid">
-          <div className="containerx">
+          {/* <div className="containerx">
             {dataImages.map((card, index) => (
               
               <Card
@@ -81,6 +81,18 @@ function Home() {
                 imageSrc={card.imageSrc}
                 title={card.title}
                 description={card.desc}
+              />
+              
+            ))}
+          </div> */}
+          <div className="containerx">
+            {cardData.map((cardData, index) => (
+              
+              <Card
+                key={index}
+                imageSrc={cardData.imageSrc}
+                title={cardData.title}
+                description={cardData.desc}
               />
               
             ))}

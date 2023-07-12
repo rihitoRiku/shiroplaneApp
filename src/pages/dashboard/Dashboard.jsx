@@ -4,53 +4,48 @@ import Axios from "axios";
 import "./Dashboard.css";
 
 function Dashboard() {
-  const [imageSelected, setImageSelected] = useState([]);
+  const [imageSelected, setImageSelected] = useState(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [countdown, setCountdown] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
 
   const onDrop = useCallback((acceptedFiles) => {
-    
-    const newFiles = acceptedFiles.map((file) => ({
+    const file = acceptedFiles[0];
+    setImageSelected({
       file,
       path: URL.createObjectURL(file),
-    }));
-    setImageSelected((prevSelected) => [...prevSelected, ...newFiles]);
+    });
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: "image/jpeg, image/png",
-    maxFiles: 3,
   });
 
   const UploadImage = async () => {
-    if (imageSelected.length === 0) {
-      return; // No files selected, exit the function
+    if (!imageSelected) {
+      return; // No file selected, exit the function
     }
 
     setIsLoading(true);
-    const uploadPromises = imageSelected.map((item) => {
-      const formData = new FormData();
-      formData.append("file", item.file);
-      formData.append("upload_preset", "er4tbb4l");
-      return Axios.post(
-        "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
-        formData
-      ).then((response) => {
-        const newImages = {
-          // title,
-          // desc,
-          imgSrc: response.data.secure_url,
-        }
-        Axios.post('http://localhost:5000/images', newImages);
-      });
-    });
+    const formData = new FormData();
+    formData.append("file", imageSelected.file);
+    formData.append("upload_preset", "er4tbb4l");
 
     try {
-      await Promise.all(uploadPromises);
+      const response = await Axios.post(
+        "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
+        formData
+      );
+
+      const newImage = {
+        imgSrc: response.data.secure_url,
+      };
+
+      // Do something with the newImage object
+
       setUploadSuccess(true); // Set upload success state to true
-      setImageSelected([]); // Clear the imageSelected state after successful upload
+      setImageSelected(null); // Clear the imageSelected state after successful upload
       setCountdown(3); // Reset the countdown
     } catch (error) {
       console.error(error);
@@ -59,26 +54,13 @@ function Dashboard() {
     }
   };
 
-  const removeFile = (index) => {
-    setImageSelected((prevSelected) => {
-      const updatedSelected = [...prevSelected];
-      updatedSelected.splice(index, 1);
-      return updatedSelected;
-    });
+  const removeFile = () => {
+    setImageSelected(null);
     setUploadSuccess(false); // Remove the success alert when a file is removed
     setCountdown(3); // Reset the countdown
   };
 
-  const files = imageSelected.map((item, index) => (
-    <li className="flex justify-between" key={item.file.path}>
-      {/* {item.file.name} - {item.file.size} bytes */}
-      <div className="text-slate-500">{item.file.name}</div>
-      <button className="text-slate-400" onClick={() => removeFile(index)}>
-        | remove |
-      </button>
-    </li>
-  ));
-
+  // Countdown Success Alert
   useEffect(() => {
     let timeout;
     if (uploadSuccess && countdown > 0) {
@@ -96,58 +78,103 @@ function Dashboard() {
 
   return (
     <>
-      <div class="text-5xl sm:text-6xl xl:text-7xl font-medium text-center my-16 font-a">
+      <div className="text-5xl sm:text-6xl xl:text-7xl font-medium text-center mt-16 mb-8 font-a ">
         Admin Dashboard
       </div>
-      <div className="flex flex-col items-center justify-center w-full h-full py-6">
-        <div
-          {...getRootProps()}
-          className={`hover:bg-gray-50 border-2 rounded-md border-dashed w-96 h-44 ${
-            isDragActive ? "bg-gray-200" : "bg-white bkg"
-          }`}
-          style={{
-            minHeight: "100px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <input {...getInputProps()} />
-          <p className="font-b text-center">
-            Drag & drop image here, or browse file
-          </p>
-        </div>
-        <div className="my-4">
-          <button
-            className="py-2 px-4 rounded-md border-2 bg-white hover:bg-gray-50 text-black font-b"
-            onClick={UploadImage}
-            disabled={isLoading || imageSelected.length === 0}
-          >
-            {isLoading ? "Uploading..." : "Upload image"}
-          </button>
-        </div>
-        {uploadSuccess && (
+      <div className="flex md:flex-row flex-col justify-center gap-16 md:items-start items-center mb-16 py-16">
+        <div className="flex flex-col items-center justify-center h-full max-w-fit ">
           <div
-            className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
-            role="alert"
+            {...getRootProps()}
+            className={`hover:bg-gray-50 border-2 md:rounded-md border-dashed w-96 h-44 p-6 ${
+              isDragActive ? "bg-gray-200" : "bg-white bkg"
+            }`}
+            style={{
+              minHeight: "100px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
           >
-            <span className="font-medium">Success alert!</span> Files uploaded successfully.
-            <span> Auto closed on {countdown}..</span>
-          </div>
-        )}
-        <aside>
-          <div className="w-96 rounded-md border-2 bg-white flex flex-col p-4">
-            <h4 className="text-lg">Image Selected</h4>
-            <p className="mt-0 mb-4 text-gray-500 text-sm italic">
-              {imageSelected.length > 0
-                ? `Selected images: ${imageSelected.length}`
-                : "No image selected"}
+            <input {...getInputProps()} />
+            <p className="mt-0 text-gray-500 font-b text-center">
+              {imageSelected
+                ? "1 image selected"
+                : "Drag & drop image here, or browse file"}
             </p>
-            <ul className={`flex flex-col gap-2 mt-${imageSelected.length > 0 ? "4" : "0"}`}>
-              {files}
-            </ul>
+            {imageSelected && (
+              <div className="flex justify-between w-full box-border">
+                <div className="text-slate-500  break-words w-56">
+                  {imageSelected.file.name}
+                </div>
+                <div className="text-slate-400  min-w-fit">
+                  <button
+                    className=""
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeFile();
+                    }}
+                  >
+                    | remove |
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        </aside>
+          <div className="my-4">
+            <button
+              className="py-2 px-4 rounded-md border-2 bg-white hover:bg-gray-50 text-black font-b"
+              onClick={UploadImage}
+              disabled={isLoading || !imageSelected}
+            >
+              {isLoading ? "Uploading..." : "Upload image"}
+            </button>
+          </div>
+          {uploadSuccess && (
+            <div
+              className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+              role="alert"
+            >
+              <span className="font-medium">Success alert!</span> File uploaded
+              successfully.
+              <span> Auto closed on {countdown}..</span>
+            </div>
+          )}
+        </div>
+        {/* Form */}
+        <div className="w-96 border-2 p-6 md:rounded-md bg-white">
+          <h4 className="text-lg mb-8 font-b">Image Detail</h4>
+          <div className="mb-4">
+            <label
+              htmlFor="title"
+              className="font-b block text-md font-medium text-gray-700"
+            >
+              Title
+            </label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              className="border border-gray-300 px-3 py-2 mt-1 w-full rounded-md font-b block text-md"
+              placeholder="Enter title"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="description"
+              className="font-b block text-md font-medium text-gray-700"
+            >
+              Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              rows="3"
+              className="border border-gray-300 px-3 py-2 mt-1 w-full rounded-md resize-none  font-b block text-md"
+              placeholder="Enter description"
+            ></textarea>
+          </div>
+        </div>
       </div>
     </>
   );

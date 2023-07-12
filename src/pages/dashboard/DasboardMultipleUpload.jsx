@@ -21,7 +21,7 @@ function Dashboard() {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: "image/jpeg, image/png",
-    maxFiles: 3,
+    // maxFiles: 3,
   });
 
   const UploadImage = async () => {
@@ -37,7 +37,14 @@ function Dashboard() {
       return Axios.post(
         "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
         formData
-      );
+      ).then((response) => {
+        const newImages = {
+          // title,
+          // desc,
+          imgSrc: response.data.secure_url,
+        }
+        // Axios.post('http://localhost:5000/images', newImages);
+      });
     });
 
     try {
@@ -52,6 +59,7 @@ function Dashboard() {
     }
   };
 
+  // Remove selected file
   const removeFile = (index) => {
     setImageSelected((prevSelected) => {
       const updatedSelected = [...prevSelected];
@@ -71,7 +79,8 @@ function Dashboard() {
       </button>
     </li>
   ));
-
+  
+  // Countdown Success Alert
   useEffect(() => {
     let timeout;
     if (uploadSuccess && countdown > 0) {
@@ -107,7 +116,7 @@ function Dashboard() {
         >
           <input {...getInputProps()} />
           <p className="font-b text-center">
-            Drag & drop some images here, or browse file
+            Drag & drop image here, or browse file
           </p>
         </div>
         <div className="my-4">
