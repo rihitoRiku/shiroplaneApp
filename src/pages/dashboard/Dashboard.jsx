@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import Axios from "axios";
+import "./Dashboard.css";
 
 function Dashboard() {
   const [imageSelected, setImageSelected] = useState([]);
@@ -16,7 +17,10 @@ function Dashboard() {
     setImageSelected((prevSelected) => [...prevSelected, ...newFiles]);
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/jpeg, image/png",
+  });
 
   const UploadImage = async () => {
     if (imageSelected.length === 0) {
@@ -57,9 +61,10 @@ function Dashboard() {
   };
 
   const files = imageSelected.map((item, index) => (
-    <li key={item.file.path}>
-      {item.file.name} - {item.file.size} bytes
-      <button onClick={() => removeFile(index)}>Cancel</button>
+    <li className="flex justify-between" key={item.file.path}>
+      {/* {item.file.name} - {item.file.size} bytes */}
+      <div className="text-slate-500">{item.file.name}</div>
+      <button className="text-slate-400" onClick={() => removeFile(index)}>| remove |</button>
     </li>
   ));
 
@@ -83,10 +88,12 @@ function Dashboard() {
       <div class="text-5xl sm:text-6xl xl:text-7xl font-medium text-center my-16 font-a">
         Admin Dashboard
       </div>
-      <div className="flex flex-col items-center justify-center w-full h-full border-2 py-6">
+      <div className="flex flex-col items-center justify-center w-full h-full py-6">
         <div
           {...getRootProps()}
-          className={`border-2 ${isDragActive ? "bg-gray-200" : ""}`}
+          className={`hover:bg-gray-50 border-2 rounded-md border-dashed w-96 h-44 ${
+            isDragActive ? "bg-gray-200" : "bg-white bkg"
+          }`}
           style={{
             minHeight: "100px",
             display: "flex",
@@ -95,10 +102,13 @@ function Dashboard() {
           }}
         >
           <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p className="font-b text-center">
+            Drag & drop some images here, or browse file
+          </p>
         </div>
-        <div className="border-2">
+        <div className="my-4">
           <button
+            className="py-2 px-4 rounded-md border-2 bg-white hover:bg-gray-50 text-black font-b"
             onClick={UploadImage}
             disabled={isLoading || imageSelected.length === 0}
           >
@@ -116,8 +126,10 @@ function Dashboard() {
           </div>
         )}
         <aside>
-          <h4>Files</h4>
-          <ul>{files}</ul>
+          <div className="w-96 rounded-md border-2 bg-white flex flex-col p-4">
+            <h4 className="text-lg">Image Selected</h4>
+            <ul className="flex flex-col gap-2 mt-4">{files}</ul>
+          </div>
         </aside>
       </div>
     </>
