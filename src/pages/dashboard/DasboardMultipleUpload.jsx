@@ -107,7 +107,7 @@ function Dashboard() {
         >
           <input {...getInputProps()} />
           <p className="font-b text-center">
-            Drag & drop image here, or browse file
+            Drag & drop some images here, or browse file
           </p>
         </div>
         <div className="my-4">
