@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 // CSS
 import "./Home.css";
 // Components
 import Card from "../../components/card/card";
 import { cardData } from "./CardData";
+import Axios from "axios";
 
 // Icons
 import iconsinstagam from "../../assets/instagram.png"
@@ -15,6 +16,12 @@ import iconslinkedin from "../../assets/linkedin.png"
 // ScrollReveal().reveal(".reveal", { delay: 500 });
 
 function Home() {
+  const [dataImages, setDataImages] = useState([]);
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/images`).then((response) => {
+      setDataImages(response.data.data);
+    });
+  }, []);
   return (
     <>
       {/* Link Icon */}
@@ -67,13 +74,15 @@ function Home() {
         </div>
         <div className="md:w-5/6 min-h-screen container mx-auto border-solid">
           <div className="containerx">
-            {cardData.map((card, index) => (
+            {dataImages.map((card, index) => (
+              
               <Card
                 key={index}
                 imageSrc={card.imageSrc}
                 title={card.title}
-                description={card.description}
+                description={card.desc}
               />
+              
             ))}
           </div>
         </div>
