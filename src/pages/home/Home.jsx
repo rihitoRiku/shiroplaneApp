@@ -4,24 +4,25 @@ import { Link } from "react-router-dom";
 import "./Home.css";
 // Components
 import Card from "../../components/card/card";
-import { cardData } from "./CardData";
+import { cardData } from "../../Data/CardData";
 import Axios from "axios";
 
 // Icons
-import iconsinstagam from "../../assets/instagram.png"
-import iconslinkedin from "../../assets/linkedin.png"
+import iconsinstagam from "../../assets/instagram.png";
+import iconslinkedin from "../../assets/linkedin.png";
 // Scroll Reveal
 // import ScrollReveal from "scrollreveal";
 // ScrollReveal({ reset: true });
 // ScrollReveal().reveal(".reveal", { delay: 500 });
 
 function Home() {
-  // const [dataImages, setDataImages] = useState([]);
-  // useEffect(() => {
-  //   Axios.get(`http://localhost:5000/images`).then((response) => {
-  //     setDataImages(response.data.data);
-  //   });
-  // }, []);
+  const [dataImages, setDataImages] = useState([]);
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/images`).then((response) => {
+      setDataImages(response.data.data);
+    });
+    // console.log(dataImages)
+  }, []);
   return (
     <>
       {/* Link Icon */}
@@ -55,7 +56,7 @@ function Home() {
         </button>
       </div>
       {/* Content Header */}
-      <div className="h-[48rem]">
+      <div className="h-[48rem] ">
         <div class="text-5xl sm:text-6xl xl:text-7xl font-medium text-center mt-32 font-a">
           ShiroPlane Artworks
         </div>
@@ -73,30 +74,28 @@ function Home() {
           Gallery
         </div>
         <div className="md:w-5/6 min-h-screen container mx-auto border-solid">
-          {/* <div className="containerx">
+          <div className="containerx">
             {dataImages.map((card, index) => (
-              
               <Card
                 key={index}
-                imageSrc={card.imageSrc}
+                imageSrc={card.imgSrc}
                 title={card.title}
                 description={card.desc}
               />
-              
             ))}
-          </div> */}
-          <div className="containerx">
+          </div>
+          
+          {/* Locally Dummy Data */}
+          {/* <div className="containerx">
             {cardData.map((cardData, index) => (
-              
               <Card
                 key={index}
                 imageSrc={cardData.imageSrc}
                 title={cardData.title}
-                description={cardData.desc}
+                description={cardData.description}
               />
-              
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </>

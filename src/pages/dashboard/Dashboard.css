@@ -4,3 +4,11 @@
   linear-gradient(90deg, transparent 11px, rgba(220, 220, 200, 0.5) 12px, transparent 12px);
 background-size: 100% 12px, 12px 100%;
 }
+
+.bg-paper{
+  background-image: url("../../assets/so-white.png");
+}
+
+.activeStateBg {
+  
+}

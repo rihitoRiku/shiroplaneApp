@@ -17,9 +17,9 @@ function Card({ imageSrc, title, description }) {
     }
 
     return (
-        <div className={`card ${cardSizeClass} reveal bg-zinc-50 font-b`}>
+        <div className={`card ${cardSizeClass} reveal bg-zinc-50 font-b border-2`}>
             <div className="card-image">
-                <img src={imageSrc} alt={title} />
+                <img className="" src={imageSrc} alt={title} />
             </div>
             <div className="card-body">
                 <div className="card-text">
