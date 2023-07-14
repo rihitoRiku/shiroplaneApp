@@ -2,20 +2,31 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import Axios from "axios";
 import "./Dashboard.css";
-import { cardData } from "../../Data/CardData";
-import { BsTrashFill  } from 'react-icons/bs';
+import { BsTrashFill } from "react-icons/bs";
 
 function Dashboard() {
   const [imageSelected, setImageSelected] = useState(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [countdown, setCountdown] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
-
   const [selectedState, setSelectedState] = useState("upload");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
+  // GET IMAGE
+  const [dataImages, setDataImages] = useState([]);
+  useEffect(() => {
+    Axios.get(`http://localhost:5000/images`).then((response) => {
+      setDataImages(response.data.data);
+    });
+  }, []);
+
+  // STATE HANDLER
   const ChangeState = (item) => {
     setSelectedState(item);
   };
 
+  // DROPZONE HANDLER
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
     setImageSelected({
@@ -29,9 +40,13 @@ function Dashboard() {
     accept: "image/jpeg, image/png",
   });
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const removeFile = () => {
+    setImageSelected(null);
+    setUploadSuccess(false); // Remove the success alert when a file is removed
+    setCountdown(3); // Reset the countdown
+  };
 
+  // UPLOAD IMAGE HANDLER
   const UploadImage = async (event) => {
     event.preventDefault();
 
@@ -57,13 +72,13 @@ function Dashboard() {
       };
 
       // Do post with the newImage object
-      Axios.post('http://localhost:5000/images/', newImage)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      Axios.post("http://localhost:5000/images/", newImage)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
       setUploadSuccess(true); // Set upload success state to true
       setImageSelected(null); // Clear the imageSelected state after successful upload
@@ -75,10 +90,16 @@ function Dashboard() {
     }
   };
 
-  const removeFile = () => {
-    setImageSelected(null);
-    setUploadSuccess(false); // Remove the success alert when a file is removed
-    setCountdown(3); // Reset the countdown
+  // DELETE IMAGE HANDLER
+  const deleteImage = async (id) => {
+    console.log(id);
+    try {
+      await Axios.delete(`http://localhost:5000/images/${id}`);
+      console.log("Image deleted successfully");
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // Countdown Success Alert
@@ -96,6 +117,7 @@ function Dashboard() {
       clearTimeout(timeout);
     };
   }, [uploadSuccess, countdown]);
+
   return (
     <>
       {/* ALERT UPLOAD SUCESS */}
@@ -186,8 +208,8 @@ function Dashboard() {
                     ) : (
                       <>
                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                          <span className="font-semibold">Click to upload</span> or
-                          drag and drop
+                          <span className="font-semibold">Click to upload</span>{" "}
+                          or drag and drop
                         </p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">
                           PNG, JPG or JPEG
@@ -225,65 +247,70 @@ function Dashboard() {
                   </div>
                 </div>
                 {/* Form */}
-                <form onSubmit={UploadImage}>
-                <div className="w-96 border-2 p-6 bg-paper">
-                  <h4 className="text-lg mb-8 font-b font-medium">
-                    Describe Your Image
-                  </h4>
-                  <div className="mb-4">
-                    <label
-                      htmlFor="title"
-                      className="font-b block text-md font-medium text-gray-700"
-                    >
-                      Title
-                    </label>
-                    <input
-                      type="text"
-                      id="title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      name="title"
-                      className="border border-gray-300 px-3 py-2 mt-1 w-full font-b block text-sm"
-                      placeholder="ex: venti holding the lyra"
-                    />
+                <form>
+                  <div className="w-96 border-2 p-6 bg-paper">
+                    <h4 className="text-lg mb-8 font-b font-medium">
+                      Describe Your Image
+                    </h4>
+                    <div className="mb-4">
+                      <label
+                        htmlFor="title"
+                        className="font-b block text-md font-medium text-gray-700"
+                      >
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        id="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
+                        className="border border-gray-300 px-3 py-2 mt-1 w-full font-b block text-sm"
+                        placeholder="ex: venti holding the lyra"
+                      />
+                    </div>
+                    <div>
+                      <label
+                        htmlFor="description"
+                        className="font-b block text-md font-medium text-gray-700"
+                      >
+                        Description
+                      </label>
+                      <textarea
+                        id="description"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        name="description"
+                        rows="5"
+                        className="border border-gray-300 px-3 py-2 mt-1 w-full resize-none  font-b block text-sm"
+                        placeholder="image description here xD"
+                      ></textarea>
+                    </div>
                   </div>
-                  <div>
-                    <label
-                      htmlFor="description"
-                      className="font-b block text-md font-medium text-gray-700"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      id="description"
-                      value={description}
-                      onChange={(e) => setDescription(e.target.value)}
-                      name="description"
-                      rows="5"
-                      className="border border-gray-300 px-3 py-2 mt-1 w-full resize-none  font-b block text-sm"
-                      placeholder="image description here xD"
-                    ></textarea>
-                  </div>
-                </div>
                 </form>
               </div>
             )}
             {selectedState === "manage" && (
               <div className="flex justify-center  md:items-start items-center py-8 px-4 w-full">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[52rem]">
-                  {cardData.map((cardData, index) => (
+                  {dataImages.map((dataImages, index) => (
                     <div className="border-2 border-dashed flex gap-3 h-24 md:h-full w-full bg-paper">
                       <div className="w-1/4 md:w-2/5">
                         <img
                           className="object-cover md:h-32 w-full h-full"
-                          src={cardData.imageSrc}
+                          src={dataImages.imgSrc}
                           alt=""
                         />
                       </div>
                       <div className="w-3/4 md:w-3/5 break-words sm:p-3 p-2 place-self-start font-b">
-                        {cardData.title}{" "}
+                        {dataImages.title}{" "}
                       </div>
-                      <div className="place-self-end"><BsTrashFill className="mb-2 me-2 w-8 h-8 text-neutral-500" /></div>
+                      <button
+                        onClick={() => deleteImage(dataImages._id)}
+                        className="place-self-end"
+                      >
+                        <BsTrashFill className="mb-2 me-2 w-8 h-8 text-neutral-500" />
+                      </button>
                     </div>
                   ))}
                 </div>
