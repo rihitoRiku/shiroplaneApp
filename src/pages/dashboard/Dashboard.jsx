@@ -28,10 +28,20 @@ function Dashboard() {
     deleteImage,
     fileSizeError,
     setFileSizeError,
+    validationForm,
+    setvalidationForm,
   } = DashboardHandler();
 
   return (
     <>
+      {/* ALERT VALIDATION FORM */}
+      {validationForm && (
+        <div className="alert alert-danger pt-2 ps-2" role="alert">
+          Please fill all the form correctly!.
+          <span> Auto closed on {countdown}..</span>
+        </div>
+      )}
+
       {/* ALERT UPLOAD SUCCESS */}
       {uploadSuccess && (
         <div className="alert alert-danger pt-2 ps-2" role="alert">
@@ -216,20 +226,25 @@ function Dashboard() {
           {selectedState === "manage" && (
             <div className="flex justify-center  md:items-start items-center py-8 px-4 w-full">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[52rem]">
-                {dataImages.map((dataImages, index) => (
-                  <div className="border-2 border-dashed flex gap-3 h-24 md:h-full w-full bg-paper">
+                {dataImages.map((dataImage, index) => (
+                  <div
+                    key={index}
+                    className="border-2 border-dashed flex gap-3 h-24 md:h-full w-full bg-paper"
+                  >
                     <div className="w-1/4 md:w-2/5">
                       <img
                         className="object-cover md:h-32 w-full h-full"
-                        src={dataImages.imgSrc}
+                        src={dataImage.imgSrc}
                         alt=""
                       />
                     </div>
                     <div className="w-3/4 md:w-3/5 break-words sm:p-3 p-2 place-self-start font-b">
-                      {dataImages.title}{" "}
+                      {dataImage.title}
                     </div>
                     <button
-                      onClick={() => deleteImage(dataImages._id)}
+                      onClick={() =>
+                        deleteImage(dataImage._id, dataImage.imgId)
+                      }
                       className="place-self-end"
                     >
                       <BsTrashFill className="mb-2 me-2 w-8 h-8 text-neutral-500" />

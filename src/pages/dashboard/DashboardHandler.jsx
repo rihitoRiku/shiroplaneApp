@@ -14,6 +14,7 @@ const DashboardHandler = () => {
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [fileSizeError, setFileSizeError] = useState(false);
+  const [validationForm, setvalidationForm] = useState(false);
 
   // GET IMAGE
   useEffect(() => {
@@ -60,8 +61,9 @@ const DashboardHandler = () => {
     event.preventDefault();
 
     if (!imageSelected || !title || !description) {
-      console.log("Please select an image.");
-      return; // No file selected, exit the function
+      setvalidationForm(true);
+      setCountdown(3);
+      return;
     }
 
     setIsLoading(true);
@@ -75,8 +77,11 @@ const DashboardHandler = () => {
         formData
       );
 
+      console.log(response);
+
       const newImage = {
         imgSrc: response.data.secure_url,
+        imgId: response.data.public_id,
         title: title,
         desc: description,
       };
@@ -101,11 +106,13 @@ const DashboardHandler = () => {
   };
 
   // DELETE IMAGE HANDLER
-  const deleteImage = async (id) => {
+  const deleteImage = async (id, imgId) => {
     console.log(id);
     try {
       await Axios.delete(`http://localhost:5000/images/${id}`);
-      console.log("Image deleted successfully");
+      console.log("data deleted successfully");
+      await Axios.post(`http://localhost:5000/cloudinary/${imgId}`);
+      console.log("image deleted successfully");
       window.location.reload();
       setSelectedState("manage");
     } catch (error) {
@@ -124,15 +131,20 @@ const DashboardHandler = () => {
       timeout = setTimeout(() => {
         setCountdown((prevCountdown) => prevCountdown - 1);
       }, 1000);
+    } else if (validationForm && countdown > 0) {
+      timeout = setTimeout(() => {
+        setCountdown((prevCountdown) => prevCountdown - 1);
+      }, 1000);
     } else if (countdown === 0) {
       setUploadSuccess(false);
       setFileSizeError(false);
+      setvalidationForm(false);
     }
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [uploadSuccess, fileSizeError, countdown]);
+  }, [uploadSuccess, fileSizeError, countdown, validationForm]);
 
   //   RETURN
   return {
@@ -156,6 +168,8 @@ const DashboardHandler = () => {
     deleteImage,
     fileSizeError,
     setFileSizeError,
+    validationForm,
+    setvalidationForm,
   };
 };
 
