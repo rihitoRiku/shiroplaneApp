@@ -59,7 +59,7 @@ function Dashboard() {
       )}
 
       {/* TITLE */}
-      <div className="text-5xl sm:text-6xl xl:text-7xl font-medium text-center mt-16 mb-8 font-a">
+      <div className="text-4xl sm:text-5xl xl:text-6xl font-medium text-center mt-16 mb-8 font-a">
         Shiroplane Dashboard
       </div>
 

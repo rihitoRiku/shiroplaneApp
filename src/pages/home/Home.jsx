@@ -1,91 +1,166 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 // CSS
 import "./Home.css";
-// Components
+// COMPONENTS
 import Card from "../../components/card/card";
 import { cardData } from "../../Data/CardData";
-import Axios from "axios";
-
-// Icons
+// ICONS
 import iconsinstagam from "../../assets/instagram.png";
 import iconslinkedin from "../../assets/linkedin.png";
-// Scroll Reveal
-// import ScrollReveal from "scrollreveal";
-// ScrollReveal({ reset: true });
-// ScrollReveal().reveal(".reveal", { delay: 500 });
+import nekoButton from "../../assets/cat-button.png";
+// AOS
+import AOS from "aos";
+import "aos/dist/aos.css";
+AOS.init({ mirror: false, });
 
 function Home() {
   const [dataImages, setDataImages] = useState([]);
+  const [hideDiv, setHideDiv] = useState(false);
+  const [hovered, setHovered] = useState(false);
   useEffect(() => {
     Axios.get(`http://localhost:5000/images`).then((response) => {
       setDataImages(response.data.data);
     });
     // console.log(dataImages)
+    const handleScroll = () => {
+      // Define the number of pixels when the div should be hidden
+      const scrollThreshold = 100; // Change this value as per your requirement
+
+      // Check if the user has scrolled down enough to hide the div
+      if (window.pageYOffset > scrollThreshold) {
+        setHideDiv(true);
+      } else {
+        setHideDiv(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+
   return (
     <>
+      {/* Button */}
+      <head>
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+      </head>
+      <button
+        disabled={hideDiv}
+        className={`fixed w-16 right-4 top-6 transition-all ${
+          hideDiv ? "hidden-div-up" : "visible-div-up"
+        } ${hovered ? "my-animate-pulse" : ""}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <img className="" src={nekoButton} alt="" />
+      </button>
       {/* Link Icon */}
-      <div className="container finisher-header w-16 lg:w-16 lg:h-36 h-32 flex flex-col gap-y-2 justify-center fixed transform bottom-32">
+      <div
+        className={`container finisher-header w-16 lg:w-16 lg:h-36 h-32 flex flex-col gap-y-2 justify-center fixed transform bottom-32 ${
+          hideDiv ? "hidden-div-left" : "visible-div-left"
+        }`}
+      >
         {/* Social Media Link */}
-        <button className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center">
+        <button
+          disabled={hideDiv}
+          className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center"
+        >
           {/* Instagram */}
           <img className="w-4/5" src={iconsinstagam} alt="" />
         </button>
-        <button className="border-2 bg-white  h-1/2 rounded-e-md flex justify-center items-center">
+        <button
+          disabled={hideDiv}
+          className="border-2 bg-white  h-1/2 rounded-e-md flex justify-center items-center"
+        >
           {/* Email */}
           <img className="w-3/5" src={iconslinkedin} alt="" />
         </button>
       </div>
       {/* Content Header */}
-      <div className="h-[48rem] ">
-        <div class="text-5xl sm:text-6xl xl:text-7xl font-medium text-center mt-32 font-a">
+      <div className="">
+        <div
+          data-aos="fade-up"
+          class="text-4xl sm:text-5xl xl:text-6xl font-medium text-center mt-32 font-a"
+        >
           ShiroPlane Artworks
         </div>
-        <div className="text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b px-8">
+        <div
+          data-aos="fade-up"
+          className="text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b"
+        >
           Passionate illustrator and visual designer, dedicated student at
           university of x
         </div>
-
-        <div className=" border-dashed border-2  flex flex-row gap-x-5 mt-20 justify-center h-96">
+        <div className=" border-dashed border-2 flex flex-row gap-x-5 mt-20 justify-center ">
           {/* Caraousel */}
+          <div data-aos="fade-up" className="support-grid px-8">
+            <section className="grid-1">
+              <div className="panel panel-title">
+                <h1>Barry’s Cushion</h1>
+                <p>A tale of lethargy and soft furnishings</p>
+              </div>
+              <div className="panel panel-1"></div>
+              <div className="panel panel-2"></div>
+              <div className="panel panel-3">
+                <p>“I should probably get up–things to do.”</p>
+              </div>
+              <div className="panel panel-4"></div>
+              <div className="panel panel-5"></div>
+              <div className="panel panel-6"></div>
+              <div className="panel panel-7">
+                <p>“Naaah.”</p>
+              </div>
+              <div className="panel panel-8"></div>
+              <div className="panel panel-9"></div>
+            </section>
+          </div>
         </div>
       </div>
-      <div className="px-4 md:px-0 mb-48 ">
-        <div class="text-4xl sm:text-5xl xl:text-6xl font-normal text-center font-a mt-24 my-16">
+      <div className="px-4 md:px-0 mb-48 max-w-6xl flex flex-col justify-center items-center mx-auto">
+        <div
+          data-aos="fade-up"
+          class="text-4xl sm:text-5xl xl:text-6xl font-normal text-center font-a mt-24"
+        >
           Gallery
         </div>
-        <div className="md:w-5/6 container mx-auto border-solid">
-          
-          {/* If no imagaes */}
+        <div
+          data-aos="fade-up"
+          className="text-lg sm:text-xl xl:text-2xl text-center my-12 text-slate-600 font-b container max-w-4xl"
+        >
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
+          magni voluptates nemo porro ut veritatis.
+        </div>
+        <div className="container md:px-6">
+          {/* If no images */}
           {dataImages.length === 0 ? (
             <div className="text-center my-36 text-xl font-b">
               no images showed!
             </div>
           ) : (
-            <div className="containerx">
+            // <div className="containerx">
+            //   {/* ini kan ngemapping satu satu, nah mapnya berdasarkan kategori oke */}
+            //   {dataImages.map((card, index) => (
+            //     <Card
+            //       key={index}
+            //       imageSrc={card.imgSrc}
+            //       title={card.title}
+            //       description={card.desc}
+            //     />
+            //   ))}
+            // </div>
+            <div className="containery">
               {dataImages.map((card, index) => (
-                <Card
-                  key={index}
-                  imageSrc={card.imgSrc}
-                  title={card.title}
-                  description={card.desc}
-                />
+                <div data-aos="fade-up" key={index} className="box">
+                  <img src={card.imgSrc} alt="" />
+                </div>
               ))}
             </div>
           )}
-
-          {/* Locally Dummy Data */}
-          {/* <div className="containerx">
-            {cardData.map((cardData, index) => (
-              <Card
-                key={index}
-                imageSrc={cardData.imageSrc}
-                title={cardData.title}
-                description={cardData.description}
-              />
-            ))}
-          </div> */}
         </div>
       </div>
     </>
