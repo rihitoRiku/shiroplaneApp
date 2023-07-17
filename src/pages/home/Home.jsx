@@ -13,17 +13,30 @@ import nekoButton from "../../assets/cat-button.png";
 // AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
-AOS.init({ mirror: false, });
+AOS.init({ mirror: false });
 
 function Home() {
   const [dataImages, setDataImages] = useState([]);
   const [hideDiv, setHideDiv] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu((prevShowMenu) => !prevShowMenu);
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = showMenu ? 'hidden' : 'visible';
+  }, [showMenu]);
+
+  
   useEffect(() => {
     Axios.get(`http://localhost:5000/images`).then((response) => {
       setDataImages(response.data.data);
     });
     // console.log(dataImages)
+
+    // Scroll Effect
     const handleScroll = () => {
       // Define the number of pixels when the div should be hidden
       const scrollThreshold = 100; // Change this value as per your requirement
@@ -35,9 +48,7 @@ function Home() {
         setHideDiv(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -45,20 +56,35 @@ function Home() {
 
   return (
     <>
-      {/* Button */}
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </head>
+
+      {/* Scroll Down */}
+
+      {/* Navigation Menu */}
+      <div className={`fixed z-10 h-screen w-screen flex flex-col justify-center items-center gap-16 bg-white top-0 text-3xl sm:text-4xl font-normal text-center transition-opacity ${
+          showMenu ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}>
+        <div>Home</div>
+        <div>Dashboard</div>
+        <div>About Me</div>
+        <div>Commission</div>
+      </div>
+      
+      {/* Neko Button */}
       <button
         disabled={hideDiv}
-        className={`fixed w-16 right-4 top-6 transition-all ${
+        className={`fixed z-20 w-16 right-4 top-6  ${
           hideDiv ? "hidden-div-up" : "visible-div-up"
         } ${hovered ? "my-animate-pulse" : ""}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
+        onClick={toggleMenu}
       >
         <img className="" src={nekoButton} alt="" />
       </button>
+
       {/* Link Icon */}
       <div
         className={`container finisher-header w-16 lg:w-16 lg:h-36 h-32 flex flex-col gap-y-2 justify-center fixed transform bottom-32 ${
@@ -94,7 +120,7 @@ function Home() {
           className="text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b"
         >
           Passionate illustrator and visual designer, dedicated student at
-          university of x
+          university of Pendidikan Indonesia
         </div>
         <div className=" border-dashed border-2 flex flex-row gap-x-5 mt-20 justify-center ">
           {/* Caraousel */}
@@ -124,13 +150,13 @@ function Home() {
       <div className="px-4 md:px-0 mb-48 max-w-6xl flex flex-col justify-center items-center mx-auto">
         <div
           data-aos="fade-up"
-          class="text-4xl sm:text-5xl xl:text-6xl font-normal text-center font-a mt-24"
+          class="text-3xl sm:text-4xl xl:text-5xl font-normal text-center font-a mt-24"
         >
           Gallery
         </div>
         <div
           data-aos="fade-up"
-          className="text-lg sm:text-xl xl:text-2xl text-center my-12 text-slate-600 font-b container max-w-4xl"
+          className="text-md sm:text-lg xl:text-xl text-center my-12 text-slate-600 font-b container max-w-4xl"
         >
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores,
           magni voluptates nemo porro ut veritatis.

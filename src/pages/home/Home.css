@@ -7,7 +7,6 @@
 .font-b {
   /* font-family: "Delius", cursive; */
 }
-
 /* VARIABLES */
 :root {
   --box-spacing: 23px;
@@ -15,7 +14,6 @@
   --row-height: 5px;
   --img-height-percent: 65%;
 }
-
 /* GLOBAL STYLE */
 html {
   scroll-behavior: smooth;
@@ -28,12 +26,24 @@ body {
   background-image: url("../../assets/dot-grid.png");
   /* background-size: cover; */
   background-repeat: repeat;
+  overflow: scroll;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Microsoft Edge */
 }
 * {
   box-sizing: border-box;
 }
+/* Hide Scroll */
+/* Hide the scroll bar for webkit-based browsers */
+::-webkit-scrollbar {
+  display: none;
+}
 
-/* containerx */
+
+/* SCROLL DOWN ANIMATION */
+
+/* CONTAINER */
+
 .containerx {
   width: 100%;
   display: grid;
@@ -43,7 +53,8 @@ body {
   grid-gap: var(--box-spacing);
 }
 
-/* NekoButton */
+/* NEKOBUTTON */
+
 .hidden-div-up {
   opacity: 0;
   transform: translateY(-100%);
@@ -93,25 +104,22 @@ body {
   animation: pulse 1.5s ease-in-out infinite;
 }
 
-
-
-
 /* GRID GALLERY */
 
 .containery {
   width: 100%;
   /* margin: 0 auto; */
   columns: 4;
-  /* column-gap: 40px; */
+  column-gap: 25px;
 }
 .containery .box {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 25px;
   break-inside: avoid;
 }
 .containery .box img {
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: 12px;
   /* box-shadow: 0 0px 0px 5px #251b19; */
 }
 @media (max-width: 1200px) {
@@ -130,8 +138,6 @@ body {
     columns: 2;
   }
 }
-
-
 
 /* CARD */
 
@@ -192,8 +198,6 @@ body {
   line-height: 1.3em;
   color: #334455;
 }
-
-
 
 /* THE CARAOUSEL */
 

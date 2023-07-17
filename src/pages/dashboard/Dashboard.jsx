@@ -196,7 +196,7 @@ function Dashboard() {
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
                       name="title"
-                      className="border border-gray-300 px-3 py-2 mt-1 w-full font-b block text-sm"
+                      className="border border-gray-300 px-3 py-2 mt-1 w-full font-b block text-sm focus:outline-none"
                       placeholder="ex: venti holding the lyra"
                     />
                   </div>
@@ -213,7 +213,7 @@ function Dashboard() {
                       onChange={(e) => setDescription(e.target.value)}
                       name="description"
                       rows="5"
-                      className="border border-gray-300 px-3 py-2 mt-1 w-full resize-none  font-b block text-sm"
+                      className="border border-gray-300 px-3 py-2 mt-1 w-full resize-none font-b block text-sm focus:outline-none"
                       placeholder="image description here xD"
                     ></textarea>
                   </div>
