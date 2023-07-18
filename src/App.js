@@ -13,7 +13,7 @@ function App() {
     <ScrollToTop />
       <Routes>  
         <Route exact path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route exact path="/login" element={<Login />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="*" element={<NotFound />} />
