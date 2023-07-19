@@ -123,7 +123,7 @@ function Home() {
           className="text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b"
         >
           Passionate illustrator and visual designer, dedicated student at
-          university of Pendidikan Indonesia
+          university of Pembangunan Jaya, Indonesia
         </div>
         <div className=" border-dashed border-2 flex flex-row gap-x-5 mt-20 justify-center ">
           {/* Caraousel */}
