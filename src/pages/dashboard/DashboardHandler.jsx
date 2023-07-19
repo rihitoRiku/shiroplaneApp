@@ -33,7 +33,7 @@ const DashboardHandler = () => {
       token: `Bearer ${token}` || "",
     };
     if (id===idpath) {
-      Axios.get(`http://localhost:5000/dashboard/${id}`, { headers })
+      Axios.get(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/dashboard/${id}`, { headers })
         .then((response) => {
           console.log(response);
         })
@@ -41,7 +41,7 @@ const DashboardHandler = () => {
           // console.log(error);
         });
 
-      Axios.get(`http://localhost:5000/images`).then((response) => {
+      Axios.get(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/images`).then((response) => {
         setDataImages(response.data.data);
       });
     } else {
@@ -113,7 +113,7 @@ const DashboardHandler = () => {
       };
 
       // Do post with the newImage object
-      Axios.post("http://localhost:5000/images/", newImage)
+      Axios.post("https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/images/", newImage)
         .then(function (response) {
           console.log(response);
         })
@@ -135,9 +135,9 @@ const DashboardHandler = () => {
   const deleteImage = async (id, imgId) => {
     console.log(id);
     try {
-      await Axios.delete(`http://localhost:5000/images/${id}`);
+      await Axios.delete(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/images/${id}`);
       console.log("data deleted successfully");
-      await Axios.post(`http://localhost:5000/cloudinary/${imgId}`);
+      await Axios.post(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/cloudinary/${imgId}`);
       console.log("image deleted successfully");
       window.location.reload();
       setSelectedState("manage");
