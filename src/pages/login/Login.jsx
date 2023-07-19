@@ -40,7 +40,7 @@ function Login() {
       setCountdown(3);
       return;
     }
-    Axios.post(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/login`, { username, password })
+    Axios.post(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/auth/login`, { username, password })
       .then((response) => {
         setMessage(response.data.message);
         setvalidationForm(true);
