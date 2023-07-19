@@ -6,6 +6,7 @@ import "./Dashboard.css";
 import { BsTrashFill } from "react-icons/bs";
 
 function Dashboard() {
+  
   // Handler
   const {
     imageSelected,

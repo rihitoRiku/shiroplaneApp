@@ -1,8 +1,11 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const DashboardHandler = () => {
+  const navigate = useNavigate();
+
   const [selectedState, setSelectedState] = useState("upload");
   const [imageSelected, setImageSelected] = useState(null);
   const [title, setTitle] = useState("");
@@ -17,10 +20,33 @@ const DashboardHandler = () => {
   const [validationForm, setvalidationForm] = useState(false);
 
   // GET IMAGE
+  const id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
+
+  const idpath = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1];
+
+  // initiate dataFetch
+  const dataFetch = useRef(false);
+
   useEffect(() => {
-    Axios.get(`http://localhost:5000/images`).then((response) => {
-      setDataImages(response.data.data);
-    });
+    const headers = {
+      token: `Bearer ${token}` || "",
+    };
+    if (id===idpath) {
+      Axios.get(`http://localhost:5000/dashboard/${id}`, { headers })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          // console.log(error);
+        });
+
+      Axios.get(`http://localhost:5000/images`).then((response) => {
+        setDataImages(response.data.data);
+      });
+    } else {
+      navigate(`/login`);
+    }
   }, []);
 
   // STATE HANDLER
@@ -31,7 +57,7 @@ const DashboardHandler = () => {
   // DROPZONE HANDLER
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const maxSize = 2 * 1024 * 1024; // 2MB
 
     if (file.size > maxSize) {
       setFileSizeError(true);

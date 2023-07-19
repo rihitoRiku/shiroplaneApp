@@ -2,7 +2,7 @@ import React from "react";
 
 function PageNotFound() {
   return (
-    <div className="font-sans antialiased bg-white">
+    <div className="font-sans antialiased">
       <div className="not-found-page">
         <div className="flex flex-col justify-center items-center pt-36 pb-24 lg:px-16 px-6">
           <div className="rounded-xl p-6 flex flex-col justify-center items-center text-center">

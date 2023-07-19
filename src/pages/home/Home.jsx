@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import Axios from "axios";
 // CSS
 import "./Home.css";
@@ -16,20 +17,24 @@ import "aos/dist/aos.css";
 AOS.init({ mirror: false });
 
 function Home() {
+  
+  const navigate = useNavigate();
+
   const [dataImages, setDataImages] = useState([]);
   const [hideDiv, setHideDiv] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  const id = localStorage.getItem("id");
 
   const toggleMenu = () => {
     setShowMenu((prevShowMenu) => !prevShowMenu);
   };
 
   useEffect(() => {
-    document.body.style.overflow = showMenu ? 'hidden' : 'visible';
+    document.body.style.overflow = showMenu ? "hidden" : "visible";
   }, [showMenu]);
 
-  
   useEffect(() => {
     Axios.get(`http://localhost:5000/images`).then((response) => {
       setDataImages(response.data.data);
@@ -56,22 +61,20 @@ function Home() {
 
   return (
     <>
-      <head>
-        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-      </head>
 
       {/* Scroll Down */}
 
       {/* Navigation Menu */}
-      <div className={`fixed z-10 h-screen w-screen flex flex-col justify-center items-center gap-16 bg-white top-0 text-3xl sm:text-4xl font-normal text-center transition-opacity ${
+      <div
+        className={`fixed z-10 h-screen w-screen flex flex-col justify-center items-center gap-16 bg-white top-0 text-3xl sm:text-4xl font-normal text-center transition-opacity ${
           showMenu ? "opacity-100" : "opacity-0 pointer-events-none"
-        }`}>
-        <div>Home</div>
-        <div>Dashboard</div>
-        <div>About Me</div>
-        <div>Commission</div>
+        }`}
+      >
+        <button onClick={() => navigate(`/dashboard/${id}`)}>Dashboard</button>
+        <button onClick={() => navigate("/about")}>About Me</button>
+        <button onClick={() => navigate("/commission")}>Commission</button>
       </div>
-      
+
       {/* Neko Button */}
       <button
         disabled={hideDiv}
@@ -111,7 +114,7 @@ function Home() {
       <div className="">
         <div
           data-aos="fade-up"
-          class="text-4xl sm:text-5xl xl:text-6xl font-medium text-center mt-32 font-a"
+          className="text-4xl sm:text-5xl xl:text-6xl font-medium text-center mt-32 font-a"
         >
           ShiroPlane Artworks
         </div>
@@ -150,7 +153,7 @@ function Home() {
       <div className="px-4 md:px-0 mb-48 max-w-6xl flex flex-col justify-center items-center mx-auto">
         <div
           data-aos="fade-up"
-          class="text-3xl sm:text-4xl xl:text-5xl font-normal text-center font-a mt-24"
+          className="text-3xl sm:text-4xl xl:text-5xl font-normal text-center font-a mt-24"
         >
           Gallery
         </div>

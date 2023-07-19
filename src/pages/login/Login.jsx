@@ -1,14 +1,36 @@
 import { useState, useCallback, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import Axios from "axios";
 import Alert from "../../../src/components/alert/alert";
 
+import Illust from "../../assets/Cl.png";
+
 function Login() {
+
+  const navigate = useNavigate();
+
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [validationForm, setvalidationForm] = useState(false);
 
   const [message, setMessage] = useState("");
   const [countdown, setCountdown] = useState(3);
+
+ 
+
+  // const Route = () => {
+  //   if (localStorage.getItem("token")) {
+  //     return <Redirect to="/dashboard" />;
+  //   } else {
+  //     return <Redirect to="/login" />;
+  //   }
+  // }
+
+  // localStorage.setItem('token', token);
+  // const token = localStorage.getItem('token');
+  // localStorage.removeItem('token');
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -23,7 +45,14 @@ function Login() {
         setMessage(response.data.message);
         setvalidationForm(true);
         setCountdown(3);
-        console.log(response);
+        let token = response.data.data.accessToken;
+        let id = response.data.data._id;
+        localStorage.setItem('id', id);
+        localStorage.setItem("token", token);
+        const headers = {
+          token: `Bearer ${token}`,
+        };
+        navigate(`/dashboard/${id}`)
       })
       .catch((error) => {
         setMessage(error.response.data.message);
@@ -52,14 +81,9 @@ function Login() {
   return (
     <>
       {/* ALERT VALIDATION FORM */}
-      {validationForm && (
-        <Alert
-          message={message}
-          countdown={countdown}
-        />
-      )}
+      {validationForm && <Alert message={message} countdown={countdown} />}
 
-      <div className="px-4 h-[48em] flex flex-col items-center justify-center">
+      <div className="mx-auto max-w-5xl px-4 h-[55em] flex flex-col items-center justify-center">
         <div className="text-4xl sm:text-5xl xl:text-6xl text-center">
           Login Page
         </div>
@@ -109,6 +133,9 @@ function Login() {
             >
               Login
             </button>
+          </div>
+          <div className="h-56 w-56 place-self-start relative -top-14 -left-6">
+            <img src={Illust} alt="" />
           </div>
         </form>
       </div>
