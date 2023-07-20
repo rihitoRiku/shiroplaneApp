@@ -15,6 +15,7 @@ const DashboardHandler = () => {
   const [countdown, setCountdown] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
 
+  const [loader, setLoader] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [fileSizeError, setFileSizeError] = useState(false);
   const [validationForm, setvalidationForm] = useState(false);
@@ -23,25 +24,26 @@ const DashboardHandler = () => {
   const id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
 
-  const idpath = window.location.pathname.split('/')[window.location.pathname.split('/').length - 1];
-
-  // initiate dataFetch
-  const dataFetch = useRef(false);
+  // GET THE PARAMS
+  const idpath =
+    window.location.pathname.split("/")[
+      window.location.pathname.split("/").length - 1
+    ];
 
   useEffect(() => {
     const headers = {
       token: `Bearer ${token}` || "",
     };
-    if (id===idpath) {
-      Axios.get(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/dashboard/${id}`, { headers })
+    if (id === idpath) {
+      Axios.get(`http://localhost:5000/dashboard/${id}`, { headers })
         .then((response) => {
           console.log(response);
         })
         .catch((error) => {
-          // console.log(error);
+          console.log(error);
         });
 
-      Axios.get(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/images`).then((response) => {
+      Axios.get(`http://localhost:5000/images`).then((response) => {
         setDataImages(response.data.data);
       });
     } else {
@@ -95,15 +97,16 @@ const DashboardHandler = () => {
     setIsLoading(true);
     const formData = new FormData();
     formData.append("file", imageSelected.file);
-    formData.append("upload_preset", "er4tbb4l");
+    // formData.append("upload_preset", "er4tbb4l");
 
     try {
       const response = await Axios.post(
-        "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
-        formData
-      );
+        // "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
+        // formData
+        "http://localhost:5000/cloudinary/", formData
+        );
 
-      console.log(response);
+      console.log("RESSSS:",response);
 
       const newImage = {
         imgSrc: response.data.secure_url,
@@ -113,7 +116,7 @@ const DashboardHandler = () => {
       };
 
       // Do post with the newImage object
-      Axios.post("https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/images/", newImage)
+      await Axios.post("http://localhost:5000/images/", newImage)
         .then(function (response) {
           console.log(response);
         })
@@ -124,25 +127,29 @@ const DashboardHandler = () => {
       setUploadSuccess(true); // Set upload success state to true
       setImageSelected(null); // Clear the imageSelected state after successful upload
       setCountdown(3); // Reset the countdown
+      window.location.href = window.location.href;
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
+      
     }
   };
 
   // DELETE IMAGE HANDLER
   const deleteImage = async (id, imgId) => {
-    console.log(id);
     try {
-      await Axios.delete(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/images/${id}`);
+      setLoader(true);
+      await Axios.delete(`http://localhost:5000/images/${id}`);
       console.log("data deleted successfully");
-      await Axios.post(`https://shiroplane-backend-fqh3iis7e-slvally.vercel.app/cloudinary/${imgId}`);
+      await Axios.post(`http://localhost:5000/cloudinary/${imgId}`);
       console.log("image deleted successfully");
-      window.location.reload();
       setSelectedState("manage");
+      window.location.href = window.location.href;
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoader(false); // Set loader back to false when the deletion process is complete
     }
   };
 
@@ -196,6 +203,8 @@ const DashboardHandler = () => {
     setFileSizeError,
     validationForm,
     setvalidationForm,
+    loader,
+    setLoader,
   };
 };
 

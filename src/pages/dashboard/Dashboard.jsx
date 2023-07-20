@@ -4,9 +4,9 @@ import DashboardHandler from "./DashboardHandler";
 import "./Dashboard.css";
 // Icons
 import { BsTrashFill } from "react-icons/bs";
+import Loader from "../../../src/components/loader/loader";
 
 function Dashboard() {
-  
   // Handler
   const {
     imageSelected,
@@ -31,10 +31,16 @@ function Dashboard() {
     setFileSizeError,
     validationForm,
     setvalidationForm,
+    loader,
+    setLoader,
   } = DashboardHandler();
 
   return (
     <>
+
+      {/* SET LOADER */}
+      {(loader || isLoading) && <Loader />}
+
       {/* ALERT VALIDATION FORM */}
       {validationForm && (
         <div className="alert alert-danger pt-2 ps-2" role="alert">
@@ -65,7 +71,7 @@ function Dashboard() {
       </div>
 
       {/* NAVIGATION */}
-      <div className="h-full ">
+      <div className="h-full mb-[8em]">
         <ul className="flex gap-8 items-center justify-center text-lg my-6 font-b">
           <li>
             <button
@@ -94,7 +100,7 @@ function Dashboard() {
         </ul>
 
         {/* STATE */}
-        <div className="text-lg flex items-center justify-center flex-col">
+        <div className="text-lg flex items-center justify-center flex-col ">
           {/* UPLOAD STATE */}
           {selectedState === "upload" && (
             <div className=" flex md:flex-row flex-col justify-center gap-16 md:items-start items-center py-8">
@@ -226,33 +232,41 @@ function Dashboard() {
           {/* MANAGE STATE */}
           {selectedState === "manage" && (
             <div className="flex justify-center  md:items-start items-center py-8 px-4 w-full">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[52rem]">
-                {dataImages.map((dataImage, index) => (
-                  <div
-                    key={index}
-                    className="border-2 border-dashed flex gap-3 h-24 md:h-full w-full bg-paper"
-                  >
-                    <div className="w-1/4 md:w-2/5">
-                      <img
-                        className="object-cover md:h-32 w-full h-full"
-                        src={dataImage.imgSrc}
-                        alt=""
-                      />
-                    </div>
-                    <div className="w-3/4 md:w-3/5 break-words sm:p-3 p-2 place-self-start font-b">
-                      {dataImage.title}
-                    </div>
-                    <button
-                      onClick={() =>
-                        deleteImage(dataImage._id, dataImage.imgId)
-                      }
-                      className="place-self-end"
-                    >
-                      <BsTrashFill className="mb-2 me-2 w-8 h-8 text-neutral-500" />
-                    </button>
+              {dataImages.length === 0 ? (
+                <>
+                  <div className="text-center w-full">Image not exist</div>
+                </>
+              ) : (
+                <>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-[52rem]">
+                    {dataImages.map((dataImage, index) => (
+                      <div
+                        key={index}
+                        className="border-2 border-dashed flex gap-3 h-24 md:h-full w-full bg-paper"
+                      >
+                        <div className="w-1/4 md:w-2/5">
+                          <img
+                            className="object-cover md:h-32 w-full h-full"
+                            src={dataImage.imgSrc}
+                            alt=""
+                          />
+                        </div>
+                        <div className="w-3/4 md:w-3/5 break-words sm:p-3 p-2 place-self-start font-b">
+                          {dataImage.title}
+                        </div>
+                        <button
+                          onClick={() =>
+                            deleteImage(dataImage._id, dataImage.imgId)
+                          }
+                          className="place-self-end"
+                        >
+                          <BsTrashFill className="mb-2 me-2 w-8 h-8 text-neutral-500" />
+                        </button>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </>
+              )}
             </div>
           )}
         </div>
