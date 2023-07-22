@@ -36,7 +36,7 @@ function Home() {
   }, [showMenu]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:5000/images`).then((response) => {
+    Axios.get(`https://shiroplane-backend.vercel.app/images`).then((response) => {
       setDataImages(response.data.data);
     });
     // console.log(dataImages)
