@@ -97,12 +97,9 @@ const DashboardHandler = () => {
     setIsLoading(true);
     const formData = new FormData();
     formData.append("file", imageSelected.file);
-    // formData.append("upload_preset", "er4tbb4l");
 
     try {
       const response = await Axios.post(
-        // "https://api.cloudinary.com/v1_1/dqmorrdhr/upload",
-        // formData
         "http://localhost:5000/cloudinary/", formData
         );
 
@@ -138,12 +135,17 @@ const DashboardHandler = () => {
 
   // DELETE IMAGE HANDLER
   const deleteImage = async (id, imgId) => {
+
+    const bodyData = {
+      public_id : imgId
+    };
+
     try {
       setLoader(true);
       await Axios.delete(`http://localhost:5000/images/${id}`);
-      console.log("data deleted successfully");
-      await Axios.post(`http://localhost:5000/cloudinary/${imgId}`);
-      console.log("image deleted successfully");
+      // console.log("data deleted successfully");
+      await Axios.delete(`http://localhost:5000/cloudinary`, { data: bodyData });
+      // console.log("image deleted successfully");
       setSelectedState("manage");
       window.location.href = window.location.href;
     } catch (error) {
