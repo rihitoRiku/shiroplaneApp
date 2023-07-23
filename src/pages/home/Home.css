@@ -26,18 +26,18 @@ body {
   background-image: url("../../assets/dot-grid.png");
   /* background-size: cover; */
   background-repeat: repeat;
-  overflow: scroll;
-  scrollbar-width: none; /* For Firefox */
-  -ms-overflow-style: none; /* For Internet Explorer and Microsoft Edge */
+  /* overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;  */
 }
 * {
   box-sizing: border-box;
 }
 /* Hide Scroll */
 /* Hide the scroll bar for webkit-based browsers */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 
 /* SCROLL DOWN ANIMATION */

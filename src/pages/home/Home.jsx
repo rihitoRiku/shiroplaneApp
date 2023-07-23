@@ -95,6 +95,7 @@ function Home() {
         }`}
       >
         {/* Social Media Link */}
+        {/* https://instagram.com/shiro_plane?igshid=NTc4MTIwNjQ2YQ== */}
         <button
           disabled={hideDiv}
           className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center"
@@ -120,7 +121,7 @@ function Home() {
         </div>
         <div
           data-aos="fade-up"
-          className="text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b"
+          className="mx-4 text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b"
         >
           Passionate illustrator and visual designer, dedicated student at
           university of Pembangunan Jaya, Indonesia
