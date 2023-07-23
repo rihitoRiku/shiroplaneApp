@@ -30,26 +30,48 @@ const DashboardHandler = () => {
       window.location.pathname.split("/").length - 1
     ];
 
-  useEffect(() => {
+  const fetchData = () => {
+    setIsLoading(true);
     const headers = {
       token: `Bearer ${token}` || "",
     };
+
     if (id === idpath) {
-      Axios.get(`https://shiroplane-backend.vercel.app/dashboard/${id}`, { headers })
-        .then((response) => {
-          console.log(response);
+      Promise.all([
+        Axios.get(`https://shiroplane-backend.vercel.app/dashboard/${id}`, {
+          headers,
+        }),
+        Axios.get(`https://shiroplane-backend.vercel.app/images`),
+      ])
+        .then((responses) => {
+          const [dashboardResponse, imagesResponse] = responses;
+          console.log(dashboardResponse);
+          setDataImages(imagesResponse.data.data);
         })
         .catch((error) => {
-          console.log(error);
+          navigate(`/login`);
+        })
+        .finally(() => {
+          setIsLoading(false); // Set loading to false regardless of success or error
         });
-
-      Axios.get(`https://shiroplane-backend.vercel.app/images`).then((response) => {
-        setDataImages(response.data.data);
-      });
     } else {
+      // Redirect to login page if not authenticated
       navigate(`/login`);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [id, token]);
+
+  const logout = (event) => {
+    // event.preventDefault();
+    setIsLoading(true);
+    localStorage.removeItem("token");
+    setIsLoading(false);
+    window.location.href = window.location.href;
+
+  }
 
   // STATE HANDLER
   const changeState = (item) => {
@@ -100,10 +122,9 @@ const DashboardHandler = () => {
 
     try {
       const response = await Axios.post(
-        "https://shiroplane-backend.vercel.app/cloudinary/", formData
-        );
-
-      console.log("RESSSS:",response);
+        "https://shiroplane-backend.vercel.app/cloudinary/",
+        formData
+      );
 
       const newImage = {
         imgSrc: response.data.secure_url,
@@ -113,7 +134,10 @@ const DashboardHandler = () => {
       };
 
       // Do post with the newImage object
-      await Axios.post("https://shiroplane-backend.vercel.app/images/", newImage)
+      await Axios.post(
+        "https://shiroplane-backend.vercel.app/images/",
+        newImage
+      )
         .then(function (response) {
           console.log(response);
         })
@@ -123,36 +147,36 @@ const DashboardHandler = () => {
 
       setUploadSuccess(true); // Set upload success state to true
       setImageSelected(null); // Clear the imageSelected state after successful upload
+      // window.location.href = window.location.href;
       setCountdown(3); // Reset the countdown
-      window.location.href = window.location.href;
     } catch (error) {
       console.error(error);
     } finally {
       setIsLoading(false);
-      
     }
   };
 
   // DELETE IMAGE HANDLER
   const deleteImage = async (id, imgId) => {
-
     const bodyData = {
-      public_id : imgId
+      public_id: imgId,
     };
 
     try {
       setLoader(true);
       await Axios.delete(`https://shiroplane-backend.vercel.app/images/${id}`);
       // console.log("data deleted successfully");
-      await Axios.delete(`https://shiroplane-backend.vercel.app/cloudinary`, { data: bodyData });
+      await Axios.delete(`https://shiroplane-backend.vercel.app/cloudinary`, {
+        data: bodyData,
+      });
       // console.log("image deleted successfully");
       setSelectedState("manage");
-      window.location.href = window.location.href;
     } catch (error) {
       console.error(error);
     } finally {
       setLoader(false); // Set loader back to false when the deletion process is complete
     }
+    window.location.href = window.location.href;
   };
 
   // COUNT DOWN
@@ -174,6 +198,7 @@ const DashboardHandler = () => {
       setUploadSuccess(false);
       setFileSizeError(false);
       setvalidationForm(false);
+      window.location.href = window.location.href;
     }
 
     return () => {
@@ -207,6 +232,7 @@ const DashboardHandler = () => {
     setvalidationForm,
     loader,
     setLoader,
+    logout,
   };
 };
 
