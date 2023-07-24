@@ -71,24 +71,24 @@ function Dashboard() {
         </>
       ) : (
         <>
-          <div className=" my-8 max-w-3xl mx-auto flex gap-4">
+          <div className="my-8 max-w-3xl mx-auto flex justify-center gap-4">
             <button
               onClick={() => navigate(`/`)}
-              className={`border-2 w-28 h-12 text-lg flex justify-center items-center gap-2`}
+              className={`bg-white border-2 w-28 h-12 text-lg flex justify-center items-center gap-2`}
             >
               <BsArrowLeft className="text-2xl" />
               <span>Back</span>
             </button>
             <button
               onClick={logout}
-              className={`border-2 w-28 h-12 text-lg flex justify-center items-center gap-2`}
+              className={`bg-white border-2 w-28 h-12 text-lg flex justify-center items-center gap-2`}
             >
               <BsShieldLock className="text-2xl" />
               <span>Logout</span>
             </button>
             <button
               onClick={()=>window.location.href = window.location.href}
-              className={`border-2 w-36 h-12 text-lg flex justify-center items-center gap-2`}
+              className={`bg-white border-2 w-36 h-12 text-lg flex justify-center items-center gap-2`}
             >
               <IoMdRefresh className="text-2xl" />
               <span>Refresh</span>
