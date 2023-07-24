@@ -4,6 +4,7 @@ import Axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const DashboardHandler = () => {
+  
   const navigate = useNavigate();
 
   const [selectedState, setSelectedState] = useState("upload");
@@ -70,8 +71,7 @@ const DashboardHandler = () => {
     localStorage.removeItem("token");
     setIsLoading(false);
     window.location.href = window.location.href;
-
-  }
+  };
 
   // STATE HANDLER
   const changeState = (item) => {

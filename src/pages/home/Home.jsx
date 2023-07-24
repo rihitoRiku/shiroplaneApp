@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 // CSS
 import "./Home.css";
@@ -10,14 +10,14 @@ import { cardData } from "../../Data/CardData";
 // ICONS
 import iconsinstagam from "../../assets/instagram.png";
 import iconslinkedin from "../../assets/linkedin.png";
-import nekoButton from "../../assets/cat-button.png";
+import nekoButton from "../../assets/Catto2.png";
+import nekoButtonHovered from "../../assets/Catto.png";
 // AOS
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init({ mirror: false });
 
 function Home() {
-  
   const navigate = useNavigate();
 
   const [dataImages, setDataImages] = useState([]);
@@ -36,9 +36,11 @@ function Home() {
   }, [showMenu]);
 
   useEffect(() => {
-    Axios.get(`https://shiroplane-backend.vercel.app/images`).then((response) => {
-      setDataImages(response.data.data);
-    });
+    Axios.get(`https://shiroplane-backend.vercel.app/images`).then(
+      (response) => {
+        setDataImages(response.data.data);
+      }
+    );
     // console.log(dataImages)
 
     // Scroll Effect
@@ -61,7 +63,6 @@ function Home() {
 
   return (
     <>
-
       {/* Scroll Down */}
 
       {/* Navigation Menu */}
@@ -78,14 +79,14 @@ function Home() {
       {/* Neko Button */}
       <button
         disabled={hideDiv}
-        className={`fixed z-20 w-16 right-4 top-6  ${
+        className={`fixed z-20 w-20 right-4 top-6  ${
           hideDiv ? "hidden-div-up" : "visible-div-up"
-        } ${hovered ? "my-animate-pulse" : ""}`}
+        } ${hovered ? "" : ""}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onClick={toggleMenu}
       >
-        <img className="" src={nekoButton} alt="" />
+        {hovered ? (<img className="" src={nekoButtonHovered} alt="" />) : (<img className="" src={nekoButton} alt="" />)}
       </button>
 
       {/* Link Icon */}
@@ -95,21 +96,22 @@ function Home() {
         }`}
       >
         {/* Social Media Link */}
-        {/* https://instagram.com/shiro_plane?igshid=NTc4MTIwNjQ2YQ== */}
-        <button
-          disabled={hideDiv}
+        <a
+          href="https://instagram.com/shiro_plane?igshid=NTc4MTIwNjQ2YQ=="
+          target={"_blank"}
           className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center"
         >
           {/* Instagram */}
           <img className="w-4/5" src={iconsinstagam} alt="" />
-        </button>
-        <button
-          disabled={hideDiv}
+        </a>
+        <a
+          href="#"
+          // target={"_blank"}
           className="border-2 bg-white  h-1/2 rounded-e-md flex justify-center items-center"
         >
           {/* Email */}
           <img className="w-3/5" src={iconslinkedin} alt="" />
-        </button>
+        </a>
       </div>
       {/* Content Header */}
       <div className="">
@@ -173,7 +175,6 @@ function Home() {
             </div>
           ) : (
             // <div className="containerx">
-            //   {/* ini kan ngemapping satu satu, nah mapnya berdasarkan kategori oke */}
             //   {dataImages.map((card, index) => (
             //     <Card
             //       key={index}
