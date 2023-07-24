@@ -8,7 +8,6 @@ import { BsTrashFill, BsArrowLeft, BsShieldLock } from "react-icons/bs";
 import { IoMdRefresh } from "react-icons/io";
 import Loader from "../../../src/components/loader/loader";
 
-
 function Dashboard() {
   const navigate = useNavigate();
   // Handler
