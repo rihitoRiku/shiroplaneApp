@@ -99,7 +99,7 @@ function Home() {
         <a
           href="https://instagram.com/shiro_plane?igshid=NTc4MTIwNjQ2YQ=="
           target={"_blank"}
-          className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center"
+          className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center "
         >
           {/* Instagram */}
           <img className="w-4/5" src={iconsinstagam} alt="" />
@@ -109,7 +109,7 @@ function Home() {
           // target={"_blank"}
           className="border-2 bg-white  h-1/2 rounded-e-md flex justify-center items-center"
         >
-          {/* Email */}
+          {/* Linkedin */}
           <img className="w-3/5" src={iconslinkedin} alt="" />
         </a>
       </div>
