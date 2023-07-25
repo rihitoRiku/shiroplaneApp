@@ -36,12 +36,19 @@ function Home() {
   }, [showMenu]);
 
   useEffect(() => {
-    Axios.get(`https://shiroplane-backend.vercel.app/images`).then(
-      (response) => {
-        setDataImages(response.data.data);
+    async function fetchData() {
+      try {
+        await Axios.get(`https://shiroplane-backend.vercel.app/images`).then(
+          (response) => {
+            setDataImages(response.data.data);
+          }
+        );
+      } catch (error) {
+        console.log(error);
       }
-    );
-    // console.log(dataImages)
+    }
+    fetchData();
+    // console.log(dataImages);
 
     // Scroll Effect
     const handleScroll = () => {
@@ -60,6 +67,10 @@ function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(dataImages);
+  }, [dataImages]);
 
   return (
     <>
@@ -86,7 +97,11 @@ function Home() {
         onMouseLeave={() => setHovered(false)}
         onClick={toggleMenu}
       >
-        {hovered ? (<img className="" src={nekoButtonHovered} alt="" />) : (<img className="" src={nekoButton} alt="" />)}
+        {hovered ? (
+          <img className="" src={nekoButtonHovered} alt="" />
+        ) : (
+          <img className="" src={nekoButton} alt="" />
+        )}
       </button>
 
       {/* Link Icon */}
@@ -174,21 +189,13 @@ function Home() {
               no images showed!
             </div>
           ) : (
-            // <div className="containerx">
-            //   {dataImages.map((card, index) => (
-            //     <Card
-            //       key={index}
-            //       imageSrc={card.imgSrc}
-            //       title={card.title}
-            //       description={card.desc}
-            //     />
-            //   ))}
-            // </div>
             <div className="containery">
               {dataImages.map((card, index) => (
-                <div data-aos="fade-up" key={index} className="box">
-                  <img src={card.imgSrc} alt="" />
-                </div>
+                <a key={index} href={`/detail/${index}`}>
+                  <div data-aos="fade-up" className="box">
+                    <img src={card.imgSrc} alt="" />
+                  </div>
+                </a>
               ))}
             </div>
           )}
@@ -196,9 +203,6 @@ function Home() {
       </div>
     </>
   );
-}
-{
-  /* <script src="finisher-header.es5.min.js" type="text/javascript"></script> */
 }
 
 export default Home;

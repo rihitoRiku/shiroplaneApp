@@ -8,10 +8,11 @@ import NotFound from "./pages/notfound/NotFound";
 import ScrollToTop from "./components/scrolltotop/ScrollToTop";
 
 function App() {
+
   return (
     <BrowserRouter>
-    <ScrollToTop />
-      <Routes>  
+      <ScrollToTop />
+      <Routes>
         <Route exact path="/" element={<Home />} />
         <Route path="/dashboard/:id" element={<Dashboard />} />
         <Route exact path="/login" element={<Login />} />
