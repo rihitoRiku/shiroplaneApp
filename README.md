@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Shiroplane Artworks - Discover the Creative World of Shiroplane
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!-- ![Shiroplane Artworks](link-to-your-image.png) -->
 
-## Available Scripts
+Welcome to Shiroplane Artworks, a captivating digital art exhibition that showcases the amazing talent of Shiroplane, an artist with a passion for creativity and expression. This profile/portfolio web project invites you to explore the beauty and diversity of Shiroplane's artworks.
 
-In the project directory, you can run:
+## Website Highlights
 
-### `npm start`
+- **Stunning Animated UI/UX Design:** Inspired by the artistic paper theme, our website offers an interactive and visually delightful experience for every visitor.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Responsive Across All Devices:** Whether you're browsing on a desktop, tablet, or smartphone, you'll enjoy a smooth and seamless experience.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Elegant Layout & Fonts:** Our simple yet elegant layout, paired with a carefully chosen display font, ensures an engaging and aesthetically pleasing presentation.
 
-### `npm test`
+- **Optimized Performance:** Experience lightning-fast loading times and minimal lag, making your journey through the art pieces enjoyable.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Demo & Features
 
-### `npm run build`
+1. **Landing Page:** Welcome to Shiroplane Artworks! Learn about Shiroplane's unique art style and vision.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Masonry Gallery:** Explore Shiroplane's artworks showcased in a neat and attractive masonry gallery. Filter artworks by category, date, or popularity.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Admin Dashboard:** Shiroplane manages the portfolio effortlessly, with the ability to upload new artworks, edit existing ones, and remove unwanted pieces.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. **Authentication System:** Create an account, log in, and log out with ease. Reset your password or change your username if needed.
 
-### `npm run eject`
+5. **Artist Profile:** Delve deeper into Shiroplane's world with a biography, achievements, awards, and testimonials.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+6. **Contact & Social Links:** Get in touch with Shiroplane via email or follow on various social media platforms like Instagram, Twitter, or Facebook.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+7. **Commission Form:** Request a custom artwork by specifying your preferences in terms of size, style, theme, and budget.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+8. **Fancy Loader:** Watch a delightful paper plane flying across the screen while the website loads.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+9. **Animated Navigation Button:** Enjoy smooth navigation with an animated paper plane icon that changes color depending on the section you're in.
 
-## Learn More
+10. **Scroll Reveal Element:** Experience dynamism as website elements appear or disappear while scrolling.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Meet the Team
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Visual Designer:** Ananda
+- **Copywriter & UI/UX Designer:** Rafi Shidiq
+- **Programmer:** Rafi Shidiq
+- **Gallery Assets:** Ananda
 
-### Code Splitting
+## Technology and Tools
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **Main Language:** JavaScript
+- **Front-end:** React.js, Tailwind CSS, Axios, React-dropzone, React-icons, React-helmet, React-router-dom
+- **RestAPI or Back-end:** Node.js, Express.js, JWT Auth, MongoDB Mongoose
+- **Other NPM Dependencies:** cloudinary, cors, crypto-js, dotenv, helmet, morgan, multer & multer-storage-cloudinary, nodemon
+- **Cloud Databases:** MongoDB Atlas
+- **Cloud Storage:** Cloudinary v2
+- **Cloud Deployment:** Vercel
 
-### Analyzing the Bundle Size
+## Contribute
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+We welcome contributions and feedback from the community to make Shiroplane Artworks even better. Feel free to open issues or submit pull requests!
 
-### Making a Progressive Web App
+## Visit Shiroplane Artworks
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Don't miss this opportunity to immerse yourself in the world of art! Explore Shiroplane Artworks now and be inspired by the creativity and talent on display.
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Visit the live website: [shiroplane-artworks.com](https://www.shiroplane-artworks.com)
