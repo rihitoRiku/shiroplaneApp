@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import { Helmet } from "react-helmet";
 // CSS
 import "./Home.css";
+import pageIcon from './../../assets/1st.png'; // Import the icon file
 // COMPONENTS
 import Card from "../../components/card/card";
 import { cardData } from "../../Data/CardData";
@@ -74,6 +76,11 @@ function Home() {
 
   return (
     <>
+      <Helmet>
+        <title>ShiroPlane</title>
+        <link rel="icon" type="image/png" href={pageIcon} />
+      </Helmet>
+
       {/* Scroll Down */}
 
       {/* Navigation Menu */}
@@ -140,13 +147,13 @@ function Home() {
           data-aos="fade-up"
           className="mx-4 text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b"
         >
-          Hi, I’m Ananda, passionate illustrator and visual
-          designer. I’m currently a student at the University of Pembangunan
-          Jaya, Indonesia, where I’m learning more about the art and science of
-          visual communication. I love creating beautiful and meaningful designs
-          that can inspire and delight people. I also enjoy drawing, painting,
-          and experimenting with different styles and mediums. You can see some
-          of my works in my portfolio section. Thank you for visiting my website
+          Hi, I’m Ananda, passionate illustrator and visual designer. I’m
+          currently a student at the University of Pembangunan Jaya, Indonesia,
+          where I’m learning more about the art and science of visual
+          communication. I love creating beautiful and meaningful designs that
+          can inspire and delight people. I also enjoy drawing, painting, and
+          experimenting with different styles and mediums. You can see some of
+          my works in my portfolio section. Thank you for visiting my website
           and I hope you like what you see UwU. 😊
         </div>
         <div className=" border-dashed border-y-2 flex flex-row gap-x-5 mt-20 justify-center ">
@@ -185,7 +192,10 @@ function Home() {
           data-aos="fade-up"
           className="text-md sm:text-lg xl:text-xl text-center mb-12 mt-5 text-slate-600 font-b container"
         >
-          Welcome to my gallery section, where I showcase some of my artworks that I’m proud of. You can click on any picture to see the details, such as the title, the medium, the inspiration, and the story behind it. I hope you enjoy browsing through my creations 
+          Welcome to my gallery section, where I showcase some of my artworks
+          that I’m proud of. You can click on any picture to see the details,
+          such as the title, the medium, the inspiration, and the story behind
+          it. I hope you enjoy browsing through my creations
         </div>
         <div className="container md:px-6">
           {/* If no images */}
