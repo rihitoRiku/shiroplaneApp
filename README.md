@@ -18,15 +18,15 @@ Welcome to Shiroplane Artworks, a captivating digital art exhibition that showca
 
 1. **Landing Page:** Welcome to Shiroplane Artworks! Learn about Shiroplane's unique art style and vision.
 
-2. **Masonry Gallery:** Explore Shiroplane's artworks showcased in a neat and attractive masonry gallery. Filter artworks by category, date, or popularity.
+2. **Masonry Gallery:** Explore Shiroplane's artworks showcased in a neat and attractive masonry gallery.
 
-3. **Admin Dashboard:** Shiroplane manages the portfolio effortlessly, with the ability to upload new artworks, edit existing ones, and remove unwanted pieces.
+3. **Admin Dashboard:** Shiroplane manages the portfolio effortlessly, with the ability to upload new artworks and remove unwanted pieces.
 
-4. **Authentication System:** Create an account, log in, and log out with ease. Reset your password or change your username if needed.
+4. **Authentication System:** Create an account, log in, and log out with ease.
 
-5. **Artist Profile:** Delve deeper into Shiroplane's world with a biography, achievements, awards, and testimonials.
+5. **Artist Profile:** Delve deeper into Shiroplane's world with a biography, achievements, awards, ect.
 
-6. **Contact & Social Links:** Get in touch with Shiroplane via email or follow on various social media platforms like Instagram, Twitter, or Facebook.
+6. **Contact & Social Links:** Get in touch with Shiroplane via email or follow on various social media platforms.
 
 7. **Commission Form:** Request a custom artwork by specifying your preferences in terms of size, style, theme, and budget.
 
@@ -38,7 +38,6 @@ Welcome to Shiroplane Artworks, a captivating digital art exhibition that showca
 
 ## Meet the Team
 
-- **Visual Designer:** Ananda
 - **Copywriter & UI/UX Designer:** Rafi Shidiq
 - **Programmer:** Rafi Shidiq
 - **Gallery Assets:** Ananda
