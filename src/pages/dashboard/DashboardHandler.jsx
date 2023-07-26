@@ -81,7 +81,7 @@ const DashboardHandler = () => {
   // DROPZONE HANDLER
   const onDrop = useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
-    const maxSize = 2 * 1024 * 1024; // 2MB
+    const maxSize = 1 * 1024 * 1024; // 1MB
 
     if (file.size > maxSize) {
       setFileSizeError(true);

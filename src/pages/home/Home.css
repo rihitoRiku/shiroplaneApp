@@ -1,6 +1,7 @@
 /* FONT */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 @import url("https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Delius&family=Nanum+Pen+Script&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre&display=swap');
 .font-a {
   /* font-family: "Annie Use Your Telescope", cursive; */
 }
@@ -21,7 +22,7 @@ html {
 body {
   margin: var(--box-spacing);
   /* font-family: "Open Sans", sans-serif; */
-  font: 100%/1.5 "Kalam", cursive;
+  font: 100%/1.5 "Averia Sans Libre", cursive;
   font-size: 14.5px;
   background-image: url("../../assets/dot-grid.png");
   /* background-size: cover; */
@@ -105,22 +106,24 @@ body {
 }
 
 /* GRID GALLERY */
-
 .containery {
   width: 100%;
-  /* margin: 0 auto; */
   columns: 4;
   column-gap: 25px;
 }
+
 .containery .box {
   width: 100%;
   margin-bottom: 25px;
   break-inside: avoid;
 }
+
 .containery .box img {
   max-width: 100%;
   border-radius: 12px;
-  /* box-shadow: 0 0px 0px 5px #251b19; */
+  min-height: 230px; /* Set the minimum height for the images */
+  object-fit: cover; /* Maintain aspect ratio while covering the container */
+  object-position: center; /* Center the image within the container */
 }
 @media (max-width: 1200px) {
   .containery {
