@@ -263,22 +263,26 @@ body {
 }
 .support-grid .panel-4 {
   /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cat-003.svg); */
-  background-image: url("../../assets/3rd.png");
+  background-image: url("../../assets/3_2rd.png");
 }
 .support-grid .panel-5 {
   /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cat-004.svg); */
+  background-image: url("../../assets/4th.png");
 }
 .support-grid .panel-6 {
   /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cat-005.svg); */
+  background-image: url("../../assets/7th.png");
 }
 .support-grid .panel-7 {
   box-shadow: none;
 }
 .support-grid .panel-8 {
   /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cat-007.svg); */
+  background-image: url("../../assets/6th.png");
 }
 .support-grid .panel-9 {
   /* background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/cat-008.svg); */
+  background-image: url("../../assets/5th.png");
   box-shadow: none;
 }
 /* media query 1 */

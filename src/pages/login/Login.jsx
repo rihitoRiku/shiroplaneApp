@@ -5,7 +5,7 @@ import Axios from "axios";
 import Alert from "../../../src/components/alert/alert";
 import Loader from "../../../src/components/loader/loader";
 
-import Illust from "../../assets/Cl.png";
+import Illust from "../../assets/3_2rd.png";
 
 function Login() {
   const navigate = useNavigate();

@@ -25,16 +25,16 @@ function Detail() {
   return (
     <>
       <div className="mb-5 ms-2 mt-2 max-w-7xl">
-        <div className="mb-2 text-3xl md:text-4xl font-normal text-gray-800">
+        <div className="mb-2 text-3xl md:text-4xl font-normal text-gray-800 break-words">
           {dataImages.title}
         </div>
-        <div className="text-md md:text-xl text-gray-600">
+        <div className="text-md md:text-xl text-gray-600 break-words">
           {dataImages.desc}
         </div>
       </div>
-      <div className="w-[84rem]">
+      <div className="">{/* w-[84rem] */}
         <div className="">
-          <img className="w-full" src={dataImages.imgSrc} alt="" />
+          <img className="max-h-screen" src={dataImages.imgSrc} alt="" />
         </div>
       </div>
     </>
