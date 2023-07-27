@@ -3,14 +3,15 @@ import { useState } from "react";
 import { send } from "emailjs-com";
 
 function Commission() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [from_name, setFrom_name] = useState("");
+  const [from_email, setFrom_email] = useState("");
+  const [message, setMessage] = useState("");
   const [toSend, setToSend] = useState({
     from_name: "",
     to_name: "Ananda",
+    to_email: "northc4t@gmail.com",
     message: "",
     from_email: "",
-    to_email: "",
   });
 
   const onSubmit = (e) => {
@@ -41,12 +42,12 @@ function Commission() {
         laudantium magnam voluptatem, praesentium soluta, sit minima dolorum ea
         ipsa quo enim fugit minus. 😊
       </div>
-      <form onSubmit={onsubmit} className="mt-6 w-min">
+      <form onSubmit={onSubmit} className="mt-6 w-min">
         <div className="w-96 border-2 p-6 bg-paper">
           <h4 className="text-lg mb-8 font-b font-medium">Project Detail</h4>
           <div className="mb-4">
             <label
-              htmlFor="title"
+              htmlFor="from_name"
               className="font-b block text-md font-medium text-gray-700"
             >
               Your Name
@@ -54,17 +55,17 @@ function Commission() {
             <input
               required
               type="text"
-              id="title"
+              id="from_name"
               value={toSend.from_name}
               onChange={handleChange}
-              name="title"
+              name="from_name"
               className="border border-gray-300 px-3 py-2 mt-1 w-full font-b block text-sm focus:outline-none"
-              placeholder="ex: venti holding the lyra"
+              placeholder="input your name here"
             />
           </div>
           <div className="mb-4">
             <label
-              htmlFor="title"
+              htmlFor="from_email"
               className="font-b block text-md font-medium text-gray-700"
             >
               Your Email
@@ -72,30 +73,30 @@ function Commission() {
             <input
               required
               type="text"
-              id="title"
+              id="from_email"
               value={toSend.from_email}
               onChange={handleChange}
-              name="title"
+              name="from_email"
               className="border border-gray-300 px-3 py-2 mt-1 w-full font-b block text-sm focus:outline-none"
-              placeholder="ex: venti holding the lyra"
+              placeholder="lemme know your active email"
             />
           </div>
           <div>
             <label
-              htmlFor="description"
+              htmlFor="message"
               className="font-b block text-md font-medium text-gray-700"
             >
               Project Description
             </label>
             <textarea
               required
-              id="description"
+              id="message"
               value={toSend.message}
               onChange={handleChange}
-              name="description"
+              name="message"
               rows="5"
               className="border border-gray-300 px-3 py-2 mt-1 w-full resize-none font-b block text-sm focus:outline-none"
-              placeholder="image description here xD"
+              placeholder="write your project details here xD"
             ></textarea>
           </div>
           <div className="mt-4">
