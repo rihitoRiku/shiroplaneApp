@@ -1,11 +1,9 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useDropzone } from "react-dropzone";
 import Axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const DashboardHandler = () => {
-  
-  const navigate = useNavigate();
+
 
   const [selectedState, setSelectedState] = useState("upload");
   const [imageSelected, setImageSelected] = useState(null);
@@ -50,14 +48,14 @@ const DashboardHandler = () => {
           setDataImages(imagesResponse.data.data);
         })
         .catch((error) => {
-          navigate(`/login`);
+          window.location.href = `/login`;
         })
         .finally(() => {
           setIsLoading(false); // Set loading to false regardless of success or error
         });
     } else {
       // Redirect to login page if not authenticated
-      navigate(`/login`);
+      window.location.href = `/login`;
     }
   };
 

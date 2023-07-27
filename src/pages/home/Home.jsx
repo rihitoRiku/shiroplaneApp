@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import Axios from "axios";
 import { Helmet } from "react-helmet";
 // CSS
@@ -20,7 +19,6 @@ import "aos/dist/aos.css";
 AOS.init({ mirror: false });
 
 function Home() {
-  const navigate = useNavigate();
 
   const [dataImages, setDataImages] = useState([]);
   const [hideDiv, setHideDiv] = useState(false);
@@ -89,9 +87,8 @@ function Home() {
           showMenu ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        <button onClick={() => navigate(`/dashboard/${id}`)}>Dashboard</button>
-        <button onClick={() => navigate("/about")}>About Me</button>
-        <button onClick={() => navigate("/commission")}>Commission</button>
+        <a href="/dashboard/${id}">Dashboard</a>
+        <a href="/commission">Commission</a>
       </div>
 
       {/* Neko Button */}
