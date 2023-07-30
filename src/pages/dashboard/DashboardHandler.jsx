@@ -3,8 +3,6 @@ import { useDropzone } from "react-dropzone";
 import Axios from "axios";
 
 const DashboardHandler = () => {
-
-
   const [selectedState, setSelectedState] = useState("upload");
   const [imageSelected, setImageSelected] = useState(null);
   const [title, setTitle] = useState("");
@@ -51,10 +49,12 @@ const DashboardHandler = () => {
           window.location.href = `/login`;
         })
         .finally(() => {
-          setIsLoading(false); // Set loading to false regardless of success or error
+          setIsLoading(false);
         });
     } else {
       // Redirect to login page if not authenticated
+      localStorage.removeItem("token");
+      localStorage.removeItem("id");
       window.location.href = `/login`;
     }
   };
@@ -101,8 +101,8 @@ const DashboardHandler = () => {
 
   const removeFile = () => {
     setImageSelected(null);
-    setUploadSuccess(false); // Remove the success alert when a file is removed
-    setCountdown(3); // Reset the countdown
+    setUploadSuccess(false);
+    setCountdown(3);
   };
 
   // UPLOAD IMAGE HANDLER
@@ -143,11 +143,12 @@ const DashboardHandler = () => {
         .catch(function (error) {
           console.log(error);
         });
-
-      setUploadSuccess(true); // Set upload success state to true
-      setImageSelected(null); // Clear the imageSelected state after successful upload
       // window.location.href = window.location.href;
-      setCountdown(3); // Reset the countdown
+      setUploadSuccess(true);
+      setImageSelected(null);
+      setTitle("");
+      setDescription("");
+      setCountdown(3);
     } catch (error) {
       console.error(error);
     } finally {
@@ -170,12 +171,12 @@ const DashboardHandler = () => {
       });
       // console.log("image deleted successfully");
       setSelectedState("manage");
+      window.location.href = window.location.href;
     } catch (error) {
       console.error(error);
     } finally {
-      setLoader(false); // Set loader back to false when the deletion process is complete
+      setLoader(false);
     }
-    window.location.href = window.location.href;
   };
 
   // COUNT DOWN
@@ -197,7 +198,7 @@ const DashboardHandler = () => {
       setUploadSuccess(false);
       setFileSizeError(false);
       setvalidationForm(false);
-      window.location.href = window.location.href;
+      // window.location.href = window.location.href;
     }
 
     return () => {
