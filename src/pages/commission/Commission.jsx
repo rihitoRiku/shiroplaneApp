@@ -1,28 +1,49 @@
 import React from "react";
 import { useState } from "react";
 import { send } from "emailjs-com";
+import ReCAPTCHA from "react-google-recaptcha";
 
 function Commission() {
   const [from_name, setFrom_name] = useState("");
   const [from_email, setFrom_email] = useState("");
   const [message, setMessage] = useState("");
+  const [captchaValue, setCaptchaValue] = useState(null);
+
+  const handleCaptchaChange = (value) => {
+    // The value parameter contains the response token if the user passes the CAPTCHA.
+    setCaptchaValue(value);
+  };
+
   const [toSend, setToSend] = useState({
     from_name: "",
     to_name: "Ananda",
-    to_email: "northc4t@gmail.com",
+    to_email: "fieshidiq@gmail.com",
+    // to_email: "northc4t@gmail.com",
     message: "",
     from_email: "",
   });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    send("service_kjs2cd4", "template_phpdkch", toSend, "CYlah-1obwRbUfQ0U")
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-      })
-      .catch((err) => {
-        console.log("FAILED...", err);
-      });
+    if (captchaValue) {
+      // Your email sending logic here
+      send(
+        process.env.SERVICE_ID,
+        process.env.TEMPLATE_ID,
+        toSend,
+        process.env.PRIVATE_KEY
+      )
+        .then((response) => {
+          console.log("SUCCESS!", response.status, response.text);
+        })
+        .catch((err) => {
+          console.log("FAILED...", err);
+        }).finally(()=>{
+          setCaptchaValue(null);
+        });
+    } else {
+      console.log("Please complete the CAPTCHA.");
+    }
   };
 
   const handleChange = (e) => {
@@ -99,9 +120,15 @@ function Commission() {
               placeholder="write your project details here xD"
             ></textarea>
           </div>
+          <ReCAPTCHA
+            className="mt-2 w-full"
+            sitekey={process.env.REACT_APP_SITE_KEY}
+            onChange={handleCaptchaChange}
+          />
           <div className="mt-4">
             <button
               type="submit"
+              disabled={!captchaValue}
               className="py-2 px-4 border-2 bg-white hover:bg-gray-50 text-black font-b"
             >
               Submit
