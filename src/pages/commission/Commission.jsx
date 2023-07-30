@@ -52,16 +52,13 @@ function Commission() {
 
   return (
     <div
-      data-aos="fade-up"
       className="max-w-6xl mx-auto flex flex-col justify-center items-center"
     >
       <div className="text-4xl sm:text-5xl xl:text-6xl font-medium text-center mt-16 font-a">
         Commission
       </div>
       <div className="mx-4 text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed iste, illo
-        laudantium magnam voluptatem, praesentium soluta, sit minima dolorum ea
-        ipsa quo enim fugit minus. 😊
+      Welcome to our commission draw request page, where creativity knows no bounds! Whether you're seeking a breathtaking portrait, mesmerizing fan art, or captivating illustrations, our talented artists are here to bring your visions to life. Simply submit your ideas, and our skilled team will work tirelessly to craft a one-of-a-kind masterpiece tailored to your preferences. Let your imagination soar and embrace the thrill of owning personalized art that speaks directly to your heart. Start your creative journey now! 😊
       </div>
       <form onSubmit={onSubmit} className="mt-6 w-min">
         <div className="w-96 border-2 p-6 bg-paper">
@@ -121,7 +118,7 @@ function Commission() {
             ></textarea>
           </div>
           <ReCAPTCHA
-            className="mt-2 w-full"
+            className="mt-2"
             sitekey={process.env.REACT_APP_SITE_KEY}
             onChange={handleCaptchaChange}
           />

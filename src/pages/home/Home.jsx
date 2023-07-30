@@ -4,7 +4,7 @@ import Axios from "axios";
 import { Helmet } from "react-helmet";
 // CSS
 import "./Home.css";
-import pageIcon from './../../assets/1st.png'; // Import the icon file
+import pageIcon from "./../../assets/1st.png"; // Import the icon file
 // COMPONENTS
 import Card from "../../components/card/card";
 import { cardData } from "../../Data/CardData";
@@ -19,13 +19,13 @@ import "aos/dist/aos.css";
 AOS.init({ mirror: false });
 
 function Home() {
-
   const [dataImages, setDataImages] = useState([]);
   const [hideDiv, setHideDiv] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   const id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
 
   const toggleMenu = () => {
     setShowMenu((prevShowMenu) => !prevShowMenu);
@@ -87,7 +87,12 @@ function Home() {
           showMenu ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
-        <a href="/dashboard/${id}">Dashboard</a>
+        {token && id ? (
+          <a href={`/dashboard/${id}`}>Access Dashboard</a>
+        ) : (
+          <a href={`/login`}>Login to Dashboard</a>
+        )}
+
         <a href="/commission">Commission</a>
       </div>
 

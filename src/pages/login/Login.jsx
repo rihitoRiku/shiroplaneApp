@@ -31,6 +31,24 @@ function Login() {
   // const token = localStorage.getItem('token');
   // localStorage.removeItem('token');
 
+  //HAS LOGGED IN?
+  // useEffect(() => {
+  //   console.log("oit");
+  //   const headers = {
+  //     token: `Bearer ${localStorage.getItem("token")}` || "",
+  //   };
+  //   if (localStorage.getItem("token") && localStorage.getItem("id")) {
+  //     Axios.get(`https://shiroplane-backend.vercel.app/dashboard/${localStorage.getItem("id")}`, {
+  //       headers,
+  //     }).then((responses) => {
+  //       window.location.href = `/dashboard/${localStorage.getItem("id")}`;
+  //     })
+  //     .catch((error) => {
+  //       window.location.href = `/login`;
+  //     });
+  //   }
+  // }, []);
+
   const handleLogin = (e) => {
     setIsLoading(true);
     e.preventDefault();
@@ -57,7 +75,9 @@ function Login() {
         };
         setIsLoading(false);
 
-        navigate(`/dashboard/${id}`);
+        // navigate(`/dashboard/${id}`);
+        window.location.href = `/dashboard/${id}`;
+        // <Redirect to={`/dashboard/${id}`} />;
       })
       .catch((error) => {
         setMessage(error.response.data.message);
@@ -83,6 +103,7 @@ function Login() {
       clearTimeout(timeout);
     };
   }, [countdown, validationForm]);
+
 
   return (
     <>
@@ -146,13 +167,13 @@ function Login() {
                   Login
                 </button>
                 <button
-                  onClick={()=>navigate(`/`)}
+                  onClick={() => navigate(`/`)}
                   className="h-12 w-32 border bg-white hover:bg-gray-50 text-black"
                 >
                   Cancel
                 </button>
               </div>
-              
+
               <div className="h-56 w-56 place-self-start relative -top-14 -left-6">
                 <img src={Illust} alt="" />
               </div>

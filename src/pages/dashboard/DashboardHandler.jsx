@@ -67,6 +67,7 @@ const DashboardHandler = () => {
     // event.preventDefault();
     setIsLoading(true);
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
     setIsLoading(false);
     window.location.href = window.location.href;
   };
