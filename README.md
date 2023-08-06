@@ -36,7 +36,7 @@ Welcome to Shiroplane Artworks, a captivating digital art exhibition that showca
 
 ![dashboard](https://github.com/darkRihito/shiroplaneApp/assets/133903731/eb1807e9-595c-460f-93d0-c7f887ee2c61)
 
-- **commission Request (feature send real email!)**
+- **commission Request (feature send real email and captcha!)**
 <br>
 
 ![commission](https://github.com/darkRihito/shiroplaneApp/assets/133903731/e832ad32-dffa-4aba-b57e-659c9b5311c5)
@@ -52,11 +52,11 @@ Welcome to Shiroplane Artworks, a captivating digital art exhibition that showca
 
 4. **Authentication System:** Create an account, log in, and log out with ease.
 
-5. **Artist Profile:** Delve deeper into Shiroplane's world with a biography, achievements, awards, ect.
+5. **Captcha Anti Bot:** Integrated with google captcha before sending email. Prevent bot to spam email
 
 6. **Contact & Social Links:** Get in touch with Shiroplane via email or follow on various social media platforms.
 
-7. **Commission Form:** Request a custom artwork by specifying your preferences in terms of size, style, theme, and budget.
+7. **Commission Form by Email:** Request a custom artwork by specifying your preferences in terms of size, style, theme, and budget.
 
 8. **Fancy Loader:** Watch a delightful paper plane flying across the screen while the website loads.
 
@@ -74,11 +74,12 @@ Welcome to Shiroplane Artworks, a captivating digital art exhibition that showca
 
 - **Main Language:** JavaScript
 - **Front-end:** React.js, Tailwind CSS, Axios, React-dropzone, React-icons, React-helmet, React-router-dom
-- **RestAPI or Back-end:** Node.js, Express.js, JWT Auth, MongoDB Mongoose
+- **RestAPI or Back-end:** Node.js, Express.js, JWT Auth, MongoDB Mongoose. Here is the repo: <a href="https://github.com/darkRihito/shiroplane_backend">Backend Repository</a>
 - **Other NPM Dependencies:** cloudinary, cors, crypto-js, dotenv, helmet, morgan, multer & multer-storage-cloudinary, nodemon
 - **Cloud Databases:** MongoDB Atlas
 - **Cloud Storage:** Cloudinary v2
 - **Cloud Deployment:** Vercel
+- **Other Tools** Google Captcha & EmailJs
 
 ## Contribute
 
