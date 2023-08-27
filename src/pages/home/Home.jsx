@@ -121,7 +121,7 @@ function Home() {
       >
         {/* Social Media Link */}
         <a
-          href="https://instagram.com/shiro_plane?igshid=NTc4MTIwNjQ2YQ=="
+          href="https://instagram.com/shiroplane?igshid=NzZhOTFlYzFmZQ=="
           target={"_blank"}
           className="border-2 bg-white h-1/2 rounded-e-md flex justify-center items-center "
         >
@@ -175,7 +175,7 @@ function Home() {
               <div className="panel panel-5"></div>
               <div className="panel panel-6"></div>
               <div className="panel panel-7">
-                <p>“Naaah.”</p>
+                <p>“sketch and strach”</p>
               </div>
               <div className="panel panel-8"></div>
               <div className="panel panel-9"></div>
@@ -194,8 +194,7 @@ function Home() {
           data-aos="fade-up"
           className="text-md sm:text-lg xl:text-xl text-center mb-12 mt-5 text-slate-600 font-b container"
         >
-          Welcome to my gallery section, where I showcase some of my artworks
-          that I’m proud of. You can click on any picture to see the details,
+          Welcome to my gallery section, where I showcase some of my artworks. You can click on any picture to see the details,
           such as the title, the medium, the inspiration, and the story behind
           it. I hope you enjoy browsing through my creations
         </div>

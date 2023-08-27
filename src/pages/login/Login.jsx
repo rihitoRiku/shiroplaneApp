@@ -121,8 +121,7 @@ function Login() {
               Login Page
             </div>
             <div className="text-lg sm:text-xl xl:text-2xl text-center mt-12 text-slate-600 container max-w-3xl">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Asperiores, magni voluptates nemo porro ut veritatis.
+              
             </div>
             <form className="mt-12 container max-w-lg" onSubmit={handleLogin}>
               <div className="mb-4">
