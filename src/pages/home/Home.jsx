@@ -164,12 +164,12 @@ function Home() {
             <section className="grid-1">
               <div className="panel panel-title">
                 <h1>Meet Haly</h1>
-                <p>A tale of lethargy and soft furnishings</p>
+                <p>Our mascot</p>
               </div>
               <div className="panel panel-1"></div>
               <div className="panel panel-2"></div>
               <div className="panel panel-3">
-                <p>“I should probably get up–things to do.”</p>
+                <p>“curious cat and paper airplane ”</p>
               </div>
               <div className="panel panel-4"></div>
               <div className="panel panel-5"></div>

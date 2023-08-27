@@ -140,7 +140,7 @@ const uploadImage = async (event) => {
 
     // Do post with the newImage object
     await Axios.post(
-      "http://localhost:5000/images/",
+      "https://shiroplane-backend.vercel.app/images/",
       newImage,
       {
         headers: {
@@ -169,13 +169,13 @@ const deleteImage = async (id, imgId) => {
 
   try {
     setLoader(true);
-    await Axios.delete(`http://localhost:5000/images/${id}`, {
+    await Axios.delete(`https://shiroplane-backend.vercel.app/images/${id}`, {
       headers: {
         token: `Bearer ${token}`, // Add the token to the headers
       },
     });
 
-    await Axios.delete(`http://localhost:5000/cloudinary`, {
+    await Axios.delete(`https://shiroplane-backend.vercel.app/cloudinary`, {
       data: bodyData,
       headers: {
         token: `Bearer ${token}`, // Add the token to the headers

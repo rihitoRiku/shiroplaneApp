@@ -69,9 +69,7 @@ function Commission() {
           Commission
         </div>
         <div className="mx-4 text-lg sm:text-xl xl:text-2xl text-center mt-5 text-slate-600 font-b">
-          Welcome to our commission draw request page! Our talented artists can
-          bring your visions to life with breathtaking portraits, mesmerizing
-          fan art, and captivating illustrations. Submit your ideas and let your
+          Welcome to our commission draw request page! Submit your ideas and let your
           imagination soar with personalized art tailored to your preferences.
           Start your creative journey now! 😊
         </div>
