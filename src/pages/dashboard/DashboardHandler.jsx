@@ -106,78 +106,90 @@ const DashboardHandler = () => {
   };
 
   // UPLOAD IMAGE HANDLER
-  const uploadImage = async (event) => {
-    event.preventDefault();
+const uploadImage = async (event) => {
+  event.preventDefault();
 
-    if (!imageSelected || !title || !description) {
-      setvalidationForm(true);
-      setCountdown(3);
-      return;
-    }
+  if (!imageSelected || !title || !description) {
+    setvalidationForm(true);
+    setCountdown(3);
+    return;
+  }
 
-    setIsLoading(true);
-    const formData = new FormData();
-    formData.append("file", imageSelected.file);
+  setIsLoading(true);
+  const formData = new FormData();
+  formData.append("file", imageSelected.file);
 
-    try {
-      const response = await Axios.post(
-        "https://shiroplane-backend.vercel.app/cloudinary/",
-        formData
-      );
+  try {
+    const response = await Axios.post(
+      "https://shiroplane-backend.vercel.app/cloudinary/",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          token: `Bearer ${token}`, // Add the token to the headers
+        },
+      }
+    );
 
-      const newImage = {
-        imgSrc: response.data.secure_url,
-        imgId: response.data.public_id,
-        title: title,
-        desc: description,
-      };
-
-      // Do post with the newImage object
-      await Axios.post(
-        "https://shiroplane-backend.vercel.app/images/",
-        newImage
-      )
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      // window.location.href = window.location.href;
-      setUploadSuccess(true);
-      setImageSelected(null);
-      setTitle("");
-      setDescription("");
-      setCountdown(3);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // DELETE IMAGE HANDLER
-  const deleteImage = async (id, imgId) => {
-    const bodyData = {
-      public_id: imgId,
+    const newImage = {
+      imgSrc: response.data.secure_url,
+      imgId: response.data.public_id,
+      title: title,
+      desc: description,
     };
 
-    try {
-      setLoader(true);
-      await Axios.delete(`https://shiroplane-backend.vercel.app/images/${id}`);
-      // console.log("data deleted successfully");
-      await Axios.delete(`https://shiroplane-backend.vercel.app/cloudinary`, {
-        data: bodyData,
-      });
-      // console.log("image deleted successfully");
-      setSelectedState("manage");
-      window.location.href = window.location.href;
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoader(false);
-    }
+    // Do post with the newImage object
+    await Axios.post(
+      "http://localhost:5000/images/",
+      newImage,
+      {
+        headers: {
+          token: `Bearer ${token}`, // Add the token to the headers
+        },
+      }
+    );
+    
+    setUploadSuccess(true);
+    setImageSelected(null);
+    setTitle("");
+    setDescription("");
+    setCountdown(3);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+// DELETE IMAGE HANDLER
+const deleteImage = async (id, imgId) => {
+  const bodyData = {
+    public_id: imgId,
   };
+
+  try {
+    setLoader(true);
+    await Axios.delete(`http://localhost:5000/images/${id}`, {
+      headers: {
+        token: `Bearer ${token}`, // Add the token to the headers
+      },
+    });
+
+    await Axios.delete(`http://localhost:5000/cloudinary`, {
+      data: bodyData,
+      headers: {
+        token: `Bearer ${token}`, // Add the token to the headers
+      },
+    });
+    
+    setSelectedState("manage");
+    window.location.href = window.location.href;
+  } catch (error) {
+    console.error(error);
+  } finally {
+    setLoader(false);
+  }
+};
 
   // COUNT DOWN
   useEffect(() => {

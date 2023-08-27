@@ -6,6 +6,7 @@ import "./Dashboard.css";
 // Icons
 import { BsTrashFill, BsArrowLeft, BsShieldLock } from "react-icons/bs";
 import { IoMdRefresh } from "react-icons/io";
+import Alert from "../../components/alert/alert";
 import Loader from "../../../src/components/loader/loader";
 
 function Dashboard() {
@@ -51,7 +52,7 @@ function Dashboard() {
 
       {/* ALERT UPLOAD SUCCESS */}
       {uploadSuccess && (
-        <div className="alert alert-danger pt-2 ps-2" role="alert">
+        <div className="" role="alert">
           Upload success!.
           <span> Auto closed on {countdown}..</span>
         </div>
