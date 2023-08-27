@@ -175,7 +175,7 @@ function Home() {
               <div className="panel panel-5"></div>
               <div className="panel panel-6"></div>
               <div className="panel panel-7">
-                <p>“sketch and strach”</p>
+                <p>“sketch and stretch</p>
               </div>
               <div className="panel panel-8"></div>
               <div className="panel panel-9"></div>
