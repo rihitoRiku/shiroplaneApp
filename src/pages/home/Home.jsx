@@ -88,12 +88,18 @@ function Home() {
         }`}
       >
         {token && id ? (
-          <a href={`/dashboard/${id}`}>Access Dashboard</a>
+          <>
+            <span>
+              {">"} {"<"}
+            </span>
+            <a href={`/dashboard/${id}`}>Access Dashboard</a>
+          </>
         ) : (
           <a href={`/login`}>Login to Dashboard</a>
         )}
 
         <a href="/commission">Commission</a>
+        <div className="absolute right-0 bottom-0 mb-4 me-4 text-lg">:(</div>
       </div>
 
       {/* Neko Button */}
@@ -194,9 +200,10 @@ function Home() {
           data-aos="fade-up"
           className="text-md sm:text-lg xl:text-xl text-center mb-12 mt-5 text-slate-600 font-b container"
         >
-          Welcome to my gallery section, where I showcase some of my artworks. You can click on any picture to see the details,
-          such as the title, the medium, the inspiration, and the story behind
-          it. I hope you enjoy browsing through my creations
+          Welcome to my gallery section, where I showcase some of my artworks.
+          You can click on any picture to see the details, such as the title,
+          the medium, the inspiration, and the story behind it. I hope you enjoy
+          browsing through my creations
         </div>
         <div className="container md:px-6">
           {/* If no images */}
