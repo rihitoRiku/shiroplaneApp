@@ -162,7 +162,7 @@ function Home() {
           can inspire and delight people. I also enjoy drawing, painting, and
           experimenting with different styles and mediums. You can see some of
           my works in my portfolio section. Thank you for visiting my website
-          and I hope you like what you see UwU. 😊
+          and I hope you like what you see xD.
         </div>
         <div className=" border-dashed border-y-2 flex flex-row gap-x-5 mt-20 justify-center ">
           {/* Caraousel */}
@@ -170,7 +170,7 @@ function Home() {
             <section className="grid-1">
               <div className="panel panel-title">
                 <h1>Meet Haly</h1>
-                <p>Our mascot</p>
+                <p>Our mascot {">"}{"<"}</p>
               </div>
               <div className="panel panel-1"></div>
               <div className="panel panel-2"></div>
