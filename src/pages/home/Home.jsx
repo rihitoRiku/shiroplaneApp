@@ -153,7 +153,7 @@ function Home() {
           data-aos="fade-up"
           className="text-4xl sm:text-5xl xl:text-6xl font-medium text-center mt-32 font-a"
         >
-          ShiroPlane Artworks
+          🖌 ShiroPlane Artworks
         </div>
         <div
           data-aos="fade-up"
@@ -173,7 +173,7 @@ function Home() {
           <div data-aos="fade-up" className="support-grid px-8">
             <section className="grid-1">
               <div className="panel panel-title">
-                <h1>Meet Haly</h1>
+                <h1>Meet Haly!</h1>
                 <p>
                   Our mascot {">"}
                   {"<"}
@@ -201,7 +201,7 @@ function Home() {
           data-aos="fade-up"
           className="text-3xl sm:text-4xl xl:text-5xl font-normal text-center font-a mt-24"
         >
-          Gallery
+          🎨 Gallery
         </div>
         <div
           data-aos="fade-up"
