@@ -222,7 +222,7 @@ function Home() {
               {/* If no images */}
               {dataImages.length === 0 ? (
                 <div className="text-center my-36 text-xl font-bold">
-                  The artist haven't post any art yet :(
+                  The artist hasn't uploaded any art at this moment :(
                 </div>
               ) : (
                 <div className="container">

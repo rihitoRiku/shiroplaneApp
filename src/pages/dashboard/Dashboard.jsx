@@ -88,7 +88,7 @@ function Dashboard() {
               <span>Logout</span>
             </button>
             <button
-              onClick={()=>window.location.href = window.location.href}
+              onClick={() => (window.location.href = window.location.href)}
               className={`bg-white border-2 w-36 h-12 text-lg flex justify-center items-center gap-2`}
             >
               <IoMdRefresh className="text-2xl" />
@@ -267,7 +267,12 @@ function Dashboard() {
                 <div className="flex justify-center  md:items-start items-center py-8 px-4 w-full">
                   {dataImages.length === 0 ? (
                     <>
-                      <div className="text-center w-full">Image not exist</div>
+                      <div className="text-center w-full">
+                        Image not exist, please upload them{" "}
+                        <span>
+                          {">"}{"<"}
+                        </span>
+                      </div>
                     </>
                   ) : (
                     <>
