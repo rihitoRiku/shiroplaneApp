@@ -268,7 +268,7 @@ function Dashboard() {
                   {dataImages.length === 0 ? (
                     <>
                       <div className="text-center w-full">
-                        Image not exist, please upload them{" "}
+                        Those masterpiece, please upload them{" "}
                         <span>
                           {">"}{"<"}
                         </span>
