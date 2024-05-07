@@ -23,6 +23,7 @@ function Home() {
   const [hideDiv, setHideDiv] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const id = localStorage.getItem("id");
   const token = localStorage.getItem("token");
@@ -37,13 +38,16 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
+      setIsLoading(true); // Start loading
       try {
         await Axios.get(`https://shiroplane-backend.vercel.app/images`).then(
           (response) => {
             setDataImages(response.data.data);
+            setIsLoading(false);
           }
         );
       } catch (error) {
+        setIsLoading(false);
         console.log(error);
       }
     }
@@ -170,7 +174,10 @@ function Home() {
             <section className="grid-1">
               <div className="panel panel-title">
                 <h1>Meet Haly</h1>
-                <p>Our mascot {">"}{"<"}</p>
+                <p>
+                  Our mascot {">"}
+                  {"<"}
+                </p>
               </div>
               <div className="panel panel-1"></div>
               <div className="panel panel-2"></div>
@@ -206,21 +213,29 @@ function Home() {
           browsing through my creations
         </div>
         <div className="container md:px-6">
-          {/* If no images */}
-          {dataImages.length === 0 ? (
-            <div className="text-center my-36 text-xl font-b">
-              no images showed!
+          {isLoading ? (
+            <div className="text-center my-36 text-xl font-bold">
+              Loading Art...
             </div>
           ) : (
-            <div className="containery">
-              {dataImages.map((card, index) => (
-                <a key={index} href={`/detail/${index}`}>
-                  <div data-aos="fade-up" className="box">
-                    <img src={card.imgSrc} alt="" />
-                  </div>
-                </a>
-              ))}
-            </div>
+            <>
+              {/* If no images */}
+              {dataImages.length === 0 ? (
+                <div className="text-center my-36 text-xl font-bold">
+                  The artist haven't post any art yet :(
+                </div>
+              ) : (
+                <div className="container">
+                  {dataImages.map((card, index) => (
+                    <a key={index} href={`/detail/${index}`}>
+                      <div data-aos="fade-up" className="box">
+                        <img src={card.imgSrc} alt="" />
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>
